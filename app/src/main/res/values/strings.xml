@@ -28,6 +28,11 @@
     <string name="crear_cuenta">Crear Cuenta</string>
     <string name="recuperala_aqu">Recuperala aquí</string>
     <string name="olvidaste_la_contrase_a">¿Olvidaste la contraseña?</string>
+    <string name="registro">Registro</string>
+    <string name="correo_institucional">Correo Institucional</string>
+    <string name="email_epn_edu_ec">email@epn.edu.ec</string>
+    <string name="repetir_contrase_a">Repetir Contraseña</string>
+    <string name="registrarse">Registrarse</string>
 
 
     <!--Para items de menú desplegable de tipo de usuario-->
