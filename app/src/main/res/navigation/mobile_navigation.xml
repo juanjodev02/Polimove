@@ -35,6 +35,6 @@
     <fragment
         android:id="@+id/routeDetails"
         android:name="com.example.polimove.ui.routeDetails.RouteDetails"
-        android:label="fragment_route_details"
+        android:label="Detalle de ruta"
         tools:layout="@layout/fragment_route_details" />
 </navigation>

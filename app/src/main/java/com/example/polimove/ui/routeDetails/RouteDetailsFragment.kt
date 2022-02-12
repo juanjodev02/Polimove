@@ -6,36 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.polimove.R
+import android.widget.TextView
+import com.example.polimove.databinding.FragmentRouteDetailsBinding
 
-private const val ARG_PARAM1 = "routeName"
+private const val ROUTE_NAME_PARAM = "routeName"
 
 class RouteDetails : Fragment() {
-    private var routeName: String? = null
+    private var _binding: FragmentRouteDetailsBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            routeName = it.getString(ARG_PARAM1)
-        }
-        routeName = arguments?.getString(ARG_PARAM1)
-        Log.println(Log.ASSERT, "1", routeName as String)
-    }
+    private var routeName: String? = ""
+    private lateinit var titleTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_route_details, container, false)
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String) =
-            RouteDetails().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                }
-            }
+        _binding = FragmentRouteDetailsBinding.inflate(inflater, container, false)
+        routeName = arguments?.getString(ROUTE_NAME_PARAM)
+        Log.println(Log.ASSERT, "1", routeName as String)
+        val root: View = binding.root
+        titleTextView = binding.routeDetailsText
+        titleTextView.text = routeName
+        return root
     }
 }

@@ -19,8 +19,6 @@ import com.example.polimove.services.routes.RoutesService
 class RoutesFragment : Fragment() {
 
     private var _binding: FragmentRoutesBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private lateinit var routesList: ListView
@@ -30,9 +28,6 @@ class RoutesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(RoutesViewModel::class.java)
-
         _binding = FragmentRoutesBinding.inflate(inflater, container, false)
         val root: View = binding.root
         routesList = binding.routesListView;
@@ -42,8 +37,8 @@ class RoutesFragment : Fragment() {
                 activity as Context,
                 android.R.layout.simple_list_item_1,
                 routes.map { route -> route.name }
-            );
-        };
+            )
+        }
 
         routesList.onItemClickListener =
             AdapterView.OnItemClickListener { parent, _, position, _ ->
