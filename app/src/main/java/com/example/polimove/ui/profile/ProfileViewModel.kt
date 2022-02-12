@@ -6,8 +6,22 @@ import androidx.lifecycle.ViewModel
 
 class ProfileViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
+
+    private val _nombreCompletoEst = MutableLiveData<String>().apply {
+        value = "JUAN JOSÉ JARAMILLO CAJAMARCA"
     }
-    val text: LiveData<String> = _text
+    val nombreCompletoEst: LiveData<String> = _nombreCompletoEst
+
+    private val _correoEst = MutableLiveData<String>().apply {
+        value = "juanjo.jaramillo02@epn.edu.ec"
+    }
+    val correoEst: LiveData<String> = _correoEst
+
+    private val _celularEst = MutableLiveData<String>().apply {
+        value = "0998482373"
+    }
+    val celularEst: LiveData<String> = _celularEst
+
+
+
 }

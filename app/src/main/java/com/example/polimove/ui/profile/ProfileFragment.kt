@@ -22,16 +22,27 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
+        val profileViewModel =
             ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val textViewNomCompletoEst: TextView = binding.textViewNombreCompletoEst
+        profileViewModel.nombreCompletoEst.observe(viewLifecycleOwner) {
+            textViewNomCompletoEst.text = it
         }
+
+        val textViewCorreoEst: TextView = binding.textViewCorreoEst
+        profileViewModel.correoEst.observe(viewLifecycleOwner) {
+            textViewCorreoEst.text = it
+        }
+
+        val textViewCelularEst: TextView = binding.textViewCelularEst
+        profileViewModel.celularEst.observe(viewLifecycleOwner) {
+            textViewCelularEst.text = it
+        }
+
         return root
     }
 
