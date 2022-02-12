@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.polimove.databinding.FragmentHomeBinding
 
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -32,6 +33,27 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        val textViewEmoji: TextView = binding.textViewEmoji
+        homeViewModel.emoji.observe(viewLifecycleOwner){
+            textViewEmoji.text = it
+        }
+
+        val textViewTitulo: TextView = binding.textViewNombreRuta
+        homeViewModel.nombreRuta.observe(viewLifecycleOwner){
+            textViewTitulo.text = it
+        }
+
+        val textViewCode: TextView = binding.textViewCode
+        homeViewModel.codigo.observe(viewLifecycleOwner){
+            textViewCode.text = it
+        }
+
+        val textViewQRCODE: TextView = binding.textViewQRCODE
+        homeViewModel.QRCODE.observe(viewLifecycleOwner){
+            textViewQRCODE.text = it
+        }
+
         return root
     }
 
