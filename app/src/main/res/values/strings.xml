@@ -3,4 +3,12 @@
     <string name="title_home">Inicio</string>
     <string name="title_dashboard">Rutas</string>
     <string name="title_notifications">Perfil</string>
+    <string name="textViewStName"></string>
+    <string name="textViewStEmail"></string>
+    <string name="textViewStNumber"></string>
+    <string name="buttonCerrarSesion">Cerrar Sesión</string>
+    <string name="buttonEliminarDatos">Eliminar mis datos</string>
+
+
+
 </resources>
