@@ -1,37 +1,52 @@
 package com.example.polimove.ui.routes
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.polimove.R
 import com.example.polimove.databinding.FragmentRoutesBinding
+import com.example.polimove.services.routes.RoutesService
 
 class RoutesFragment : Fragment() {
 
     private var _binding: FragmentRoutesBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private lateinit var routesList: ListView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(RoutesViewModel::class.java)
-
         _binding = FragmentRoutesBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        routesList = binding.routesListView;
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        RoutesService.getAllRoutes { routes ->
+            routesList.adapter = ArrayAdapter(
+                activity as Context,
+                android.R.layout.simple_list_item_1,
+                routes.map { route -> route.name }
+            )
         }
+
+        routesList.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
+                val selectedRouteName = parent.getItemAtPosition(position)
+                val paramsBundle = bundleOf("routeName" to selectedRouteName)
+                findNavController().navigate(R.id.action_navigation_routes_to_routeDetails, paramsBundle)
+            }
+
         return root
     }
 
