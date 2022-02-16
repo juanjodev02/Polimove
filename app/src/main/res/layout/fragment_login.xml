@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginFragment">
@@ -36,27 +37,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewRol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/rol"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.04"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewAccedeATuCuenta" />
-
-        <Spinner
-            android:id="@+id/spinnerUsuarios"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRol" />
-
-        <TextView
             android:id="@+id/textViewNumeroDeCedula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.062"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerUsuarios" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewAccedeATuCuenta" />
 
         <EditText
             android:id="@+id/editTextNumberCedula"
@@ -158,7 +138,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textViewRecuperarContrasena"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonCrearCuenta" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonCrearCuenta"
+            app:layout_constraintVertical_bias="0.52"/>
 
         <TextView
             android:id="@+id/textViewRecuperarContrasena"
@@ -171,6 +152,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonCrearCuenta"
-            app:layout_constraintVertical_bias="0.153" />
+            app:layout_constraintVertical_bias="0.52" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
