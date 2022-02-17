@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    tools:context=".ui.profile.ProfileDriverFragment">
 
     <TextView
         android:id="@+id/textView_EstName"
@@ -41,9 +41,9 @@
         android:id="@+id/buttonContinuar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="25dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/buttonCerrarSesion"
         android:textAllCaps="true"
@@ -57,16 +57,15 @@
         android:id="@+id/buttonEliminarDatos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/buttonEliminarDatos"
+        android:layout_marginEnd="25dp"
         android:backgroundTint="@color/secondary"
+        android:text="@string/buttonEliminarDatos"
         app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonContinuar"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/buttonContinuar" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"

@@ -28,9 +28,17 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val QR: TextView = binding.textViewQRCODE
+        homeViewModel.QRCODEDRIVER.observe(viewLifecycleOwner) {
+            QR.text = it
+        }
+        val numberAsient:TextView = binding.textViewNumberAsiento
+        homeViewModel.numberAsiento.observe(viewLifecycleOwner){
+            numberAsient.text = it
+        }
+        val nameStudent:TextView=binding.textViewNameStd
+        homeViewModel.nameStd.observe(viewLifecycleOwner){
+            nameStudent.text = it
         }
         return root
     }

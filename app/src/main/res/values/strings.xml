@@ -8,6 +8,11 @@
     <string name="textViewStNumber"></string>
     <string name="buttonCerrarSesion">Cerrar Sesión</string>
     <string name="buttonEliminarDatos">Eliminar mis datos</string>
+    <string name="textViewTitle">Escanea un código QR</string>
+    <string name="textViewNameStd">LESLY TIPANLUIZA</string>
+    <string name="buttonContinuar">Continuar</string>
+    <string name="textViewQRCODE">QR CODE</string>
+    <string name="textViewNumberAsiento">12-B</string>
 
 
 
