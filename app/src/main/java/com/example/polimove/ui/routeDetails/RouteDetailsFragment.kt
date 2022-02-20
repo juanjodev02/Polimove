@@ -1,13 +1,21 @@
 package com.example.polimove.ui.routeDetails
 
+import android.R
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.polimove.databinding.FragmentRouteDetailsBinding
+import com.example.polimove.services.routes.RoutesService
+
 
 private const val ROUTE_NAME_PARAM = "routeName"
 
@@ -17,6 +25,7 @@ class RouteDetails : Fragment() {
 
     private var routeName: String? = ""
     private lateinit var titleTextView: TextView
+    private lateinit var stopsListView: ListView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +33,21 @@ class RouteDetails : Fragment() {
     ): View? {
         _binding = FragmentRouteDetailsBinding.inflate(inflater, container, false)
         routeName = arguments?.getString(ROUTE_NAME_PARAM)
-        Log.println(Log.ASSERT, "1", routeName as String)
+        stopsListView = binding.stopsListView
+        if (routeName == null) {
+            val activity: Activity? = activity
+            Toast.makeText(activity, "No se tiene los datos necesarios para mostrar una ruta.", Toast.LENGTH_LONG)
+        }
+
+        RoutesService.getRouteByName(routeName as String) { route ->
+            Log.println(Log.ASSERT, "1", route.name as String)
+            stopsListView.adapter = ArrayAdapter(
+                activity as Context,
+                R.layout.simple_list_item_1,
+                route.stops!!
+            )
+        }
+
         val root: View = binding.root
         titleTextView = binding.routeDetailsText
         titleTextView.text = routeName
