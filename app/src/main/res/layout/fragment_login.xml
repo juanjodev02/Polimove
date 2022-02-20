@@ -5,12 +5,14 @@
     android:id="@+id/fragmentLogin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    android:label="Login"
+    tools:context=".ui.login.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutLogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFFFFF"
         android:padding="10dp">
 
         <TextView
@@ -63,7 +65,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewNumeroDeCedula" />
 
         <TextView
-            android:id="@+id/textViewContraseña"
+            android:id="@+id/textViewContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -86,7 +88,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewContraseña" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewContrasena" />
 
         <Button
             android:id="@+id/buttonIniciarSesion"
@@ -96,8 +98,9 @@
             android:text="@string/iniciar_sesi_n"
             app:cornerRadius="50dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxGuardarInformacion" />
 
         <TextView
             android:id="@+id/textViewO"
@@ -107,6 +110,7 @@
             android:text="@string/o"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonIniciarSesion" />
 
@@ -120,7 +124,7 @@
             android:textColor="#3F51B5"
             app:cornerRadius="50dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintHorizontal_bias="0.842"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewO"
             app:strokeColor="#3F51B5"
@@ -131,27 +135,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="44dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:text="@string/olvidaste_la_contrase_a"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textViewRecuperarContrasena"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonCrearCuenta"
-            app:layout_constraintVertical_bias="0.52"/>
+            app:layout_constraintTop_toBottomOf="@+id/buttonCrearCuenta" />
 
         <TextView
             android:id="@+id/textViewRecuperarContrasena"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="80dp"
             android:layout_marginBottom="24dp"
             android:text="@string/recuperala_aqu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonCrearCuenta"
-            app:layout_constraintVertical_bias="0.52" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonCrearCuenta" />
+
+        <CheckBox
+            android:id="@+id/checkBoxGuardarInformacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:checked="true"
+            android:text="Recordarme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

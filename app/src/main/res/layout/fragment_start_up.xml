@@ -5,10 +5,10 @@
     android:id="@+id/fragmentStartUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StartUpFragment"
-    >
+    tools:context="ui.login.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutStartUp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF">
