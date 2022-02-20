@@ -45,8 +45,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-            .get(LoginViewModel::class.java)
+        loginViewModel = LoginViewModel()
 
         val editTextNumberCedula = binding.editTextNumberCedula
         val editTextTextPassword = binding.editTextTextPassword
@@ -64,7 +63,7 @@ class LoginFragment : Fragment() {
                     return@Observer
                 }
                 buttonIniciarSesion.isEnabled = loginFormState.isDataValid
-                loginFormState.usernameError?.let {
+                loginFormState.cedulaError?.let {
                     editTextNumberCedula.error = getString(it)
                 }
                 loginFormState.passwordError?.let {

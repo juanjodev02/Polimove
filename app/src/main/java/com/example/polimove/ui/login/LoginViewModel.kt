@@ -5,12 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.polimove.R
-import com.example.polimove.data.LoginRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel() : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -60,7 +59,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     //del usuario, si existe, buscara su correo para poder authenticarse
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
+            _loginForm.value = LoginFormState(cedulaError = R.string.invalid_cedula)
         } else if (!isPasswordValid(password)) {
             _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
         } else {
