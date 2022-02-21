@@ -3,6 +3,9 @@
     <string name="title_home">Inicio</string>
     <string name="title_dashboard">Rutas</string>
     <string name="title_notifications">Perfil</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rutasSubtitle">Rutas</string>
+    <string name="reservarButtonText">Reservar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="escudo_epn_con_nombre_en_letras">Escudo EPN con nombre en letras</string>
     <string name="polimove">Polimove</string>

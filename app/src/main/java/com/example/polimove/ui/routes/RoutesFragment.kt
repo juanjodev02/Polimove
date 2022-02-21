@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.polimove.R
 import com.example.polimove.databinding.FragmentRoutesBinding
@@ -38,14 +37,13 @@ class RoutesFragment : Fragment() {
                 android.R.layout.simple_list_item_1,
                 routes.map { route -> route.name }
             )
+            routesList.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, _, position, _ ->
+                    val selectedRouteName = parent.getItemAtPosition(position)
+                    val paramsBundle = bundleOf("routeName" to selectedRouteName)
+                    findNavController().navigate(R.id.action_navigation_routes_to_routeDetails, paramsBundle)
+                }
         }
-
-        routesList.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, _, position, _ ->
-                val selectedRouteName = parent.getItemAtPosition(position)
-                val paramsBundle = bundleOf("routeName" to selectedRouteName)
-                findNavController().navigate(R.id.action_navigation_routes_to_routeDetails, paramsBundle)
-            }
 
         return root
     }
