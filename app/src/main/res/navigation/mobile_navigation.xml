@@ -33,6 +33,23 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.example.polimove.ui.register.SignInFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_sign_in" />
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.polimove.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_register"
+            app:destination="@id/navigation_register" />
+    </fragment>
+
+
+    <fragment
         android:id="@+id/routeDetails"
         android:name="com.example.polimove.ui.routeDetails.RouteDetails"
         android:label="Detalle de ruta"
