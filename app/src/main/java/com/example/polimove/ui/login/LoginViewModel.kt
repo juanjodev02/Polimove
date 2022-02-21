@@ -14,9 +14,6 @@ class LoginViewModel() : ViewModel() {
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-
-
-
       fun login(cedula: String, password: String) {
           inicioSesionConCedula(cedula,password)
     }
@@ -43,7 +40,6 @@ class LoginViewModel() : ViewModel() {
                 for (document in result) {
                     if(document.data["cedula"]?.equals(cedula) == true){
                        encontrado=document.data["email"].toString()
-                        Log.d("TAG","Encontro el if $encontrado")
                         auth(encontrado,password)
                     }
                 }
@@ -122,6 +118,8 @@ class LoginViewModel() : ViewModel() {
         }
         return false
     }
+
+
 
 
 

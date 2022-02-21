@@ -1,5 +1,6 @@
 package com.example.polimove.ui.login
 
+import android.content.ContentValues.TAG
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.polimove.R
 import com.example.polimove.databinding.FragmentLoginBinding
 import com.example.polimove.sharedPreferences.*
+import com.example.polimove.ui.register.SignInFragment
 import com.google.common.primitives.UnsignedBytes.toInt
 
 class LoginFragment : Fragment() {
@@ -34,13 +36,8 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-        //val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         _binding =FragmentLoginBinding.inflate(inflater, container, false)
-
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -109,8 +106,18 @@ class LoginFragment : Fragment() {
         }
 
         buttonCrearCuenta.setOnClickListener{
-
-            findNavController().navigate(R.id.action_navigation_login_to_navigation_register)
+            var loginView = true
+            var fragmentoActivo: Fragment
+            if (loginView){
+                fragmentoActivo = SignInFragment()
+            }
+            else
+                fragmentoActivo = LoginFragment()
+            loginView = !loginView
+            activity?.supportFragmentManager
+                ?.beginTransaction()
+                ?.replace(R.id.fragmentContainerView, fragmentoActivo)
+                ?.commit()
         }
 
     }
