@@ -1,13 +1,16 @@
 package com.example.polimove.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class HomeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "¡Hola "+"JUAN JARAMILLO!"
+        value = "¡Hola "
     }
     val text: LiveData<String> = _text
 
@@ -16,7 +19,7 @@ class HomeViewModel : ViewModel() {
     }
     val emoji: LiveData<String> = _emoji
 
-    private val _nombreRuta = MutableLiveData<String>().apply {
+     val _nombreRuta = MutableLiveData<String>().apply {
         value = "Tu ruta: "+"PUEMBO"
     }
     val nombreRuta: LiveData<String> = _nombreRuta
