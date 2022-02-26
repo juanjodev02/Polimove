@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.polimove.R
 import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.databinding.FragmentHomeNoRouteBinding
@@ -60,19 +61,8 @@ class HomeNoRouteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonReservarRuta.setOnClickListener{
-            var view = true
-            var fragment: Fragment
-            if(view){
-                fragment = RoutesFragment()
-            }
-            else
-                fragment = HomeNoRouteFragment()
-            view = !view
-            activity?.supportFragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.fragment_routes, fragment)
-                ?.commit()
-        }
+            findNavController().navigate(R.id.action_Home_no_route_to_Routes)
+               }
     }
 
 
