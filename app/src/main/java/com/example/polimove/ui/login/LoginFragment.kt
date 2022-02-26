@@ -1,33 +1,31 @@
 package com.example.polimove.ui.login
 
-import android.content.ContentValues.TAG
+
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-import androidx.navigation.fragment.findNavController
+
 
 import com.example.polimove.R
 import com.example.polimove.databinding.FragmentLoginBinding
 import com.example.polimove.sharedPreferences.*
 import com.example.polimove.ui.register.SignInFragment
-import com.google.common.primitives.UnsignedBytes.toInt
+
 
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
     private var _binding: FragmentLoginBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
 
@@ -71,11 +69,8 @@ class LoginFragment : Fragment() {
 
         val afterTextChangedListener = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // ignore
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // ignore
             }
 
             override fun afterTextChanged(s: Editable) {
@@ -107,7 +102,7 @@ class LoginFragment : Fragment() {
 
         buttonCrearCuenta.setOnClickListener{
             var loginView = true
-            var fragmentoActivo: Fragment
+            val fragmentoActivo: Fragment
             if (loginView){
                 fragmentoActivo = SignInFragment()
             }
@@ -130,7 +125,6 @@ class LoginFragment : Fragment() {
         editTextNumberCedula.setText ( listadoLeido?.first)
         editTextTextPassword.setText ( listadoLeido?.second )
     }
-
     fun GuardarDatosEnPreferencias(editTextNumberCedula:EditText,editTextTextPassword:EditText,checkBoxRecordarme: CheckBox){
 
         val email = editTextNumberCedula.text.toString()

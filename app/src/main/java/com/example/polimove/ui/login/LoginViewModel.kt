@@ -21,7 +21,6 @@ class LoginViewModel() : ViewModel() {
     //Función para autenticarse con email y contraseña
     fun auth(email:String,password: String){
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener{
-                Log.d("TAG","$email contraseña $password")
                 if(it.isSuccessful){
                     Log.d("TAG","Se ha autenticado")
                 }
@@ -45,7 +44,7 @@ class LoginViewModel() : ViewModel() {
                 }
             }
             .addOnFailureListener { exception ->
-                Log.w("TAG", "Hay un error con sus credenciales", exception)
+                Log.w("TAG", "Hay un error con sus credenciales")
             }
 
     }
@@ -72,12 +71,12 @@ class LoginViewModel() : ViewModel() {
             bandera = validacionCedula(username)
         }
 
-        return bandera;
+        return bandera
     }
 
     // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+        return password.length > 8
     }
 
     //Validación para cédula ecuatoriana
@@ -87,7 +86,7 @@ class LoginViewModel() : ViewModel() {
             if (document.trim { it <= ' ' }.length != 10){
                 return false
             }
-            var data: MutableList<String>
+            val data: MutableList<String>
             data = document.split("").toMutableList()
             data.removeAt(0)
             data.removeAt(10)
@@ -102,14 +101,13 @@ class LoginViewModel() : ViewModel() {
             }
 
             for (i in 0 until digits.size - 1) {
-                var cor = digits[i]
                 if (i % 2 == 0) {
                     verifier = (digits[i] * 2).toByte()
                     if (verifier > 9) verifier = (verifier - 9).toByte()
                 } else verifier = (digits[i] * 1).toByte()
                 sum = (sum + verifier).toByte()
             }
-            var sobrante = (sum%10)
+            val sobrante = (sum%10)
             if ((10-sobrante).toByte()==digits[9]){
                 return true
             }

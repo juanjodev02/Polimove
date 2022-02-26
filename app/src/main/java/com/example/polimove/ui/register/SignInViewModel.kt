@@ -49,7 +49,7 @@ class SignInViewModel(): ViewModel() {
             bandera = validacionCedula(username)
         }
 
-        return bandera;
+        return bandera
     }
 
     // A placeholder password validation check
