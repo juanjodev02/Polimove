@@ -6,6 +6,8 @@ package com.example.polimove.services.user
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.polimove.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -14,8 +16,9 @@ import com.google.firebase.ktx.Firebase
 class UserService {
 companion object {
 
+    private lateinit var auth: FirebaseAuth
 
-    fun getData(cedula: String, cb: (user: User) -> Unit): Unit {
+    fun getData(cedula: String?, cb: (user: User) -> Unit): Unit {
         val firestore = FirebaseFirestore.getInstance()
         firestore
             .collection("usuarios")
@@ -28,7 +31,6 @@ companion object {
                     nameUser.lastName = document["lastName"].toString()
                     nameUser.routeId = document["routeId"].toString()
                     nameUser.email = document["email"].toString()
-                    nameUser.phone = document["phone"].toString()
                     cb(nameUser)
                 }
             }
@@ -79,6 +81,30 @@ companion object {
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
 
     }
+
+
+    fun getDriverData(cedula: String, cb: (user: User) -> Unit): Unit {
+        val firestore = FirebaseFirestore.getInstance()
+        firestore
+            .collection("conductores")
+            .whereEqualTo("cedula", cedula)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    var nameUser = document.toObject(User::class.java)
+                    nameUser.name = document["name"].toString()
+                    nameUser.lastName = document["lastName"].toString()
+                    nameUser.routeId = document["routeId"].toString()
+                    cb(nameUser)
+                }
+            }
+    }
+
+    fun signOff(){
+        Firebase.auth.signOut()
+    }
+
+
 
 
 
