@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.ViewModelProvider
+import com.example.polimove.Service.UserService
 import com.example.polimove.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -59,15 +60,15 @@ class ProfileFragment : Fragment() {
             textViewCelularEst.text = it
         }*/
 
-        parentFragmentManager.setFragmentResultListener("key",this, FragmentResultListener(
-            Key, result->
-        cedula = result.getString("cedula")
-        Log.d("CI","La cédula: $cedula")
-        UserService.getData(cedula as String){ nameUser ->
-            textViewName.text = nameUser.name+" "+nameUser.lastName
-            textViewEmail.text = nameUser.email
-        }
-        ))
+        parentFragmentManager.setFragmentResultListener("key",this, FragmentResultListener {
+                Key, result ->
+            cedula = result.getString("cedula")
+            Log.d("CI", "La cédula: $cedula")
+            UserService.getData(cedula as String) { nameUser ->
+                textViewName.text = nameUser.name + " " + nameUser.lastName
+                textViewEmail.text = nameUser.email
+            }
+        })
 
         buttonSignOut.setOnClickListener {
             UserService.signOff()
