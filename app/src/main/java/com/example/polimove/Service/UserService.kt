@@ -31,7 +31,7 @@ class UserService {
                     }
                 }
         }
-
+        /*
         fun getRouteName(rutaId: String?,cb: (nameRoute: String) -> Unit) : Unit{
             val firestore = FirebaseFirestore.getInstance()
             firestore
@@ -52,7 +52,7 @@ class UserService {
                     }
 
                 }
-        }
+        }*/
 
         fun getUserId(cedula: String?): Unit{
             val firestore = FirebaseFirestore.getInstance()
@@ -78,7 +78,7 @@ class UserService {
 
         }
 
-
+        /*
         fun getDriverData(cedula: String, cb: (user: User) -> Unit): Unit {
             val firestore = FirebaseFirestore.getInstance()
             firestore
@@ -94,7 +94,7 @@ class UserService {
                         cb(nameUser)
                     }
                 }
-        }
+        }*/
 
         fun signOff(){
             Firebase.auth.signOut()
