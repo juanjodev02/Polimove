@@ -49,4 +49,11 @@
     <string name="reservar_ruta">Reservar ruta</string>
     <string name="agregar_pasajero">+</string>
     <string name="mensaje_nuevo_pasajero">Nuevo pasajero</string>
+
+    <!--PERFIL CONDUCTOR-->
+    <string name="textViewStName"></string>
+    <string name="textViewStEmail"></string>
+    <string name="textViewStNumber"></string>
+    <string name="buttonCerrarSesion">Cerrar Sesión</string>
+    <string name="buttonEliminarDatos">Eliminar mis datos</string>
 </resources>
