@@ -11,10 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
-import androidx.lifecycle.ViewModelProvider
-import com.example.polimove.Service.UserService
-import com.example.polimove.databinding.FragmentProfileBinding
 import com.example.polimove.databinding.FragmentProfileDriverBinding
+import com.example.polimove.services.routes.UserService
 
 class ProfileDriverFragment : Fragment() {
     private var _binding: FragmentProfileDriverBinding? = null
@@ -50,7 +48,7 @@ class ProfileDriverFragment : Fragment() {
                 Key, result ->
             cedulaDriver = result.getString("cedula")
             Log.d("CI", "La cédula: $cedulaDriver")
-            UserService.getData(cedulaDriver as String) { nameUser ->
+            UserService.getDriverData(cedulaDriver as String) { nameUser ->
                 textViewNameDriver.text = nameUser.name + " " + nameUser.lastName
                 textViewEmailDriver.text = nameUser.email
             }
