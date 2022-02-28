@@ -7,7 +7,7 @@
     tools:context=".ui.profile.ProfileDriverFragment">
 
     <TextView
-        android:id="@+id/textView_EstName"
+        android:id="@+id/textView_DriverName"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
@@ -18,27 +18,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_EstEmail"
+        android:id="@+id/textView_DriverEmail"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/textViewStEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/textView_EstName" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_DriverName" />
 
     <TextView
-        android:id="@+id/textView_EstTelefono"
+        android:id="@+id/textView_DriverTelefono"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/textViewStNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/textView_EstEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_DriverEmail" />
 
     <Button
-        android:id="@+id/buttonContinuar"
+        android:id="@+id/buttonContinuarDriver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -51,10 +51,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_EstTelefono" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_DriverTelefono" />
 
     <Button
-        android:id="@+id/buttonEliminarDatos"
+        android:id="@+id/buttonEliminarDatosDriver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -65,7 +65,7 @@
         app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonContinuar" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonContinuarDriver" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
