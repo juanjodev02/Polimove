@@ -60,9 +60,11 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginBottom="400dp"
         android:backgroundTint="@color/secondary"
         android:text="@string/buttonEliminarDatos"
         app:cornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonContinuarDriver" />

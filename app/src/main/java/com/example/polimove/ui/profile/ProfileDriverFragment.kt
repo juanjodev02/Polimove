@@ -14,9 +14,10 @@ import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import com.example.polimove.Service.UserService
 import com.example.polimove.databinding.FragmentProfileBinding
+import com.example.polimove.databinding.FragmentProfileDriverBinding
 
 class ProfileDriverFragment : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: FragmentProfileDriverBinding? = null
 
     private val binding get() = _binding!!
 
@@ -36,14 +37,14 @@ class ProfileDriverFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileDriverBinding.inflate(inflater,container,false)
+        //_binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        textViewNameDriver= binding.textViewEstName
-        textViewEmailDriver= binding.textViewEstEmail
-        buttonSignOutDriver = binding.buttonContinuar
-        buttonDeleteDriver = binding.buttonEliminarDatos
+        textViewNameDriver= binding.textViewDriverName
+        textViewEmailDriver= binding.textViewDriverEmail
+        buttonSignOutDriver = binding.buttonContinuarDriver
+        buttonDeleteDriver = binding.buttonEliminarDatosDriver
 
         parentFragmentManager.setFragmentResultListener("key",this, FragmentResultListener {
                 Key, result ->
