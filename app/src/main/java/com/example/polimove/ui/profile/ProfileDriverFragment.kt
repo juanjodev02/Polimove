@@ -19,14 +19,14 @@ class ProfileDriverFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
 
     private val binding get() = _binding!!
-
+    /*
     //INICIALIZACIÓN DE VARIABLES
     private var cedulaDriver:String?=""
     private lateinit var textViewNameDriver: TextView
     private lateinit var textViewEmailDriver: TextView
     private lateinit var buttonSignOutDriver: Button
     private lateinit var buttonDeleteDriver: Button
-
+    */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -39,7 +39,7 @@ class ProfileDriverFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+        /*
         textViewNameDriver= binding.textViewEstName
         textViewEmailDriver= binding.textViewEstEmail
         buttonSignOutDriver = binding.buttonContinuar
@@ -63,7 +63,7 @@ class ProfileDriverFragment : Fragment() {
             val activity: Activity? = activity
             Toast.makeText(activity, "Datos eliminados exitosamente.", Toast.LENGTH_LONG)
         }
-
+        */
         return root
     }
 

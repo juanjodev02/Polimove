@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileDriverFragment">
-
+    <!--
     <TextView
         android:id="@+id/textView_EstName"
         android:layout_width="223dp"
@@ -75,5 +75,5 @@
         android:layout_marginTop="64dp"
         android:src="@drawable/perfil"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
