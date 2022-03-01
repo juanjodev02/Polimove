@@ -47,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle2" />
-
+    <!--
     <TextView
         android:id="@+id/textViewAsiento"
         android:layout_width="132dp"
@@ -72,6 +72,7 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNameStd" />
+        -->
 
     <TextView
         android:id="@+id/textViewQRCODE"

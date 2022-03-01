@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
 import com.example.polimove.R
 import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.databinding.FragmentHomeConductorBinding
+import com.google.zxing.integration.android.IntentIntegrator
 
 
 class HomeConductorFragment : Fragment() {
+    private lateinit var buttonAgregarPasajaero: Button
 
     private var _binding: FragmentHomeConductorBinding? = null
     // This property is only valid between onCreateView and
@@ -28,9 +31,6 @@ class HomeConductorFragment : Fragment() {
 
         _binding = FragmentHomeConductorBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-
-
 
         return root
     }

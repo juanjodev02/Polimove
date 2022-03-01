@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import com.example.polimove.databinding.FragmentHomeDriverqrBinding
 import com.google.zxing.integration.android.IntentIntegrator
@@ -20,15 +21,17 @@ class HomeDriverQRFragment: Fragment() {
     private val binding get() = _binding!!
 
     //INICIALIZACIÓN DE VARIABLES
-    private lateinit var textViewQRCode: TextView
+    //private lateinit var textViewQRCode: TextView
     private lateinit var textViewNameStd: TextView
-    private lateinit var textViewNumberAsiento: TextView
+    //private lateinit var textViewNumberAsiento: TextView
     private lateinit var buttonContinuar: Button
 
      override fun onCreate(savedInstanteSate: Bundle?) {
         super.onCreate(savedInstanteSate)
-
+         IntentIntegrator(activity).initiateScan()
     }
+
+
     /*
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,32 +60,22 @@ class HomeDriverQRFragment: Fragment() {
         buttonContinuar = binding.buttonContinuar
         textViewNameStd = binding.textViewNameStd
 
+        /*
         buttonContinuar.setOnClickListener{
-            fun onClick(view: View?) {
-
+            //fun onClick(view: View?) {
                 val integrador = IntentIntegrator(this.activity)
-                integrador.setDesireBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
+                integrador.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
                 integrador.setPrompt("Lecctor - CDP")
                 integrador.setCameraId(0)
                 integrador.setBeepEnabled(true)
                 integrador.setBarcodeImageEnabled(true)
                 integrador.initiateScan()
-            }
+            //}
+        }*/
+        buttonContinuar.setOnClickListener {
+            getActivity()?.onBackPressed()
         }
 
-        fun onActivityResult(requestCode: init, resultCode: Int, data: Intent?) {
-            val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-            if (result != null) {
-                if (result.contents == null) {
-                    Toast.makeText(activity, "Lectura Cancelada", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(activity, result.contents, Toast.LENGTH_LONG).show()
-                    textViewNameStd.setText(result.contents)
-                }
-            } else {
-                super.onActivityResult(requestCode, resultCode, data)
-            }
-        }
 
 /*
         val QR: TextView = binding.textViewQRCODE
@@ -99,13 +92,45 @@ class HomeDriverQRFragment: Fragment() {
         }
 
  */
+
+
+
         return root
+    }
+    /*
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(activity, "Lectura Cancelada", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(activity, result.contents, Toast.LENGTH_LONG).show()
+                textViewNameStd.setText(result.contents)
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+    */
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        @Nullable data: Intent?
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        val datos = result.contents
+        textViewNameStd.setText(datos)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
+
 }
 
 
