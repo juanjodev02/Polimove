@@ -1,6 +1,6 @@
 package com.example.polimove.ui.home
 
-import android.R
+import android.content.ContextParams
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +29,6 @@ class HomeDriverQRFragment: Fragment() {
 
      override fun onCreate(savedInstanteSate: Bundle?) {
         super.onCreate(savedInstanteSate)
-         IntentIntegrator(activity).initiateScan()
     }
 
     override fun onCreateView(
@@ -42,6 +41,7 @@ class HomeDriverQRFragment: Fragment() {
         buttonContinuar = binding.buttonContinuar
         textViewNameStd = binding.textViewNameStd
 
+        integrador()
         parentFragmentManager.setFragmentResultListener("key",this, FragmentResultListener {
                 Key, result ->
             cedulaStudent = result.getString("cedula")
@@ -64,7 +64,17 @@ class HomeDriverQRFragment: Fragment() {
         //textViewNameStd.setText(datos)
     }
 
-
+    fun integrador(){
+        val integrador = IntentIntegrator(this.activity)
+        integrador.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        integrador.setPrompt("Escaneando código QR")
+        integrador.setCameraId(0)
+        integrador.setOrientationLocked(true)
+        integrador.setBeepEnabled(true)
+        integrador.setBarcodeImageEnabled(true)
+        integrador.setTimeout(10000)
+        integrador.initiateScan()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
