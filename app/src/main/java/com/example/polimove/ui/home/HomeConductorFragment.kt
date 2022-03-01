@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.polimove.databinding.FragmentHomeConductorBinding
 
 
@@ -31,20 +32,15 @@ class HomeConductorFragment : Fragment() {
         _binding = FragmentHomeConductorBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        buttonAgregarPasajaero.setOnClickListener {
-            val fragment: Fragment = HomeConductorFragment()
-            val fragmentManager:FragmentManager = requireActivity().supportFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(android.R.id., fragment)
-            fragmentTransaction.addToBackStack(null)
-
-            fragmentTransaction.commit()
-        }
-
         return root
 
     }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        buttonAgregarPasajaero.setOnClickListener{
+            findNavController().navigate(android.R.id.action_Home_no_route_to_Routes)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
