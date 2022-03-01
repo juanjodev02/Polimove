@@ -6,18 +6,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentResultListener
 import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.services.user.UserService
-import com.example.polimove.ui.profile.ProfileFragment
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import io.grpc.InternalConfigSelector.KEY
+import androidx.navigation.fragment.findNavController
 
 
 private const val USER_CI_PARAM = "1722951165"
@@ -30,6 +29,12 @@ class HomeFragment : Fragment() {
     private lateinit var nameTextView: TextView
     private lateinit var textViewTitulo: TextView
     private lateinit var imageViewQRCODE: ImageView
+    private lateinit var layoutNoRoute: LinearLayout
+    private lateinit var imageViewPolibus: ImageView
+    private lateinit var textViewHM: TextView
+    private lateinit var textViewHN: TextView
+    private lateinit var textViewMensaje: TextView
+    private lateinit var buttonReservarRuta: Button
 
 
     override fun onCreateView(
@@ -40,9 +45,17 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         cedula = "1722951165"
         val root: View = binding.root
+
         nameTextView = binding.textHome
         textViewTitulo = binding.textViewNombreRuta
         imageViewQRCODE = binding.imageViewQRCODE
+        imageViewPolibus = binding.imageView
+        textViewHM = binding.textViewHorarioMatutino
+        textViewHN = binding.textViewHorarioNoche
+        textViewMensaje = binding.textViewMensaje
+        layoutNoRoute = binding.noRoute
+        buttonReservarRuta = binding.buttonReservarRuta
+
 
         UserService.getData(cedula as String) { nameUser ->
             nameTextView.text =
@@ -62,7 +75,30 @@ class HomeFragment : Fragment() {
 
         }
 
+
+        val firestore = FirebaseFirestore.getInstance()
+        UserService.checkIfUserHasARouteAttached(firestore,"1722951167") { hasRouteAttached ->
+            if (hasRouteAttached) {
+                this.textViewTitulo.visibility = View.VISIBLE
+                imageViewQRCODE.visibility = View.VISIBLE
+                imageViewPolibus.visibility = View.VISIBLE
+                textViewHM.visibility = View.VISIBLE
+                textViewHN.visibility = View.VISIBLE
+                textViewMensaje.visibility = View.VISIBLE
+                this.layoutNoRoute.visibility = View.GONE
+
+            } else {
+                this.layoutNoRoute.visibility = View.VISIBLE
+            }
+
+        }
+
+        buttonReservarRuta.setOnClickListener(){
+            findNavController().navigate(com.example.polimove.R.id.action_home_to_Routes)
+        }
+
         return root
+
     }
 
 
@@ -77,5 +113,6 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
     }
 }

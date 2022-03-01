@@ -6,110 +6,160 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="12sp"
-        android:autoSizeStepGranularity="2sp"
-        android:autoSizeTextType="uniform"
-        android:textAlignment="center"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
+        <TextView
+            android:id="@+id/textViewNombreRuta"
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
-    <TextView
-        android:id="@+id/textViewNombreRuta"
-        android:layout_width="0dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_home" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:visibility="gone"
+            android:layout_width="82dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/polibus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNombreRuta" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="82dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/polibus"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombreRuta" />
+        <TextView
+            android:id="@+id/textViewHorarioMatutino"
+            android:visibility="gone"
+            android:layout_width="188dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/horario_matutino"
+            android:textAlignment="viewStart"
+            android:textColor="#8F9090"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNombreRuta" />
 
-    <TextView
-        android:id="@+id/textViewHorarioMatutino"
-        android:layout_width="188dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/horario_matutino"
-        android:textAlignment="viewStart"
-        android:textColor="#8F9090"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombreRuta" />
-
-    <TextView
-        android:id="@+id/textViewHorarioNoche"
-        android:layout_width="188dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/horario_noche"
-        android:textAlignment="viewStart"
-        android:textColor="#8F9090"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHorarioMatutino" />
+        <TextView
+            android:id="@+id/textViewHorarioNoche"
+            android:visibility="gone"
+            android:layout_width="188dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/horario_noche"
+            android:textAlignment="viewStart"
+            android:textColor="#8F9090"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/textViewHorarioMatutino" />
 
 
-    <TextView
-        android:id="@+id/textViewCode"
-        android:layout_width="288dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="12dp"
-        android:textAlignment="center"
-        android:textColor="#8F9090"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewQRCODE" />
+        <TextView
+            android:id="@+id/textViewCode"
+            android:visibility="gone"
+            android:layout_width="288dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:textAlignment="center"
+            android:textColor="#8F9090"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewQRCODE" />
 
-    <TextView
-        android:id="@+id/textViewMensaje"
-        android:layout_width="286dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/mensaje_escanear"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCode" />
+        <TextView
+            android:id="@+id/textViewMensaje"
+            android:visibility="gone"
+            android:layout_width="286dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/mensaje_escanear"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCode" />
 
-    <ImageView
-        android:id="@+id/imageViewQRCODE"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@android:drawable/sym_def_app_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHorarioNoche" />
+        <ImageView
+            android:id="@+id/imageViewQRCODE"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@android:drawable/sym_def_app_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewHorarioNoche" />
+
+
+        <LinearLayout
+            android:id="@+id/no_route"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewMensajeSinRuta"
+                    android:layout_width="298dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="88dp"
+                    android:layout_marginEnd="40dp"
+                    android:text="@string/mensaje_sin_ruta"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_home" />
+
+                <Button
+                    android:id="@+id/buttonReservarRuta"
+                    android:layout_width="298dp"
+                    android:layout_height="61dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="40dp"
+                    android:backgroundTint="@color/primary"
+                    android:text="@string/reservar_ruta"
+                    app:cornerRadius="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewMensajeSinRuta" />
+
+        </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

@@ -107,6 +107,35 @@ companion object {
 
 
 
+    fun checkIfUserHasARouteAttached(firestore: FirebaseFirestore,identityNumberId: String, cb: (hasRouteAttached: Boolean) -> Unit) {
+        try {
+            firestore
+                .collection("usuarios")
+                .whereEqualTo("cedula", identityNumberId)
+                .get()
+                .addOnSuccessListener { result ->
+                    if (result.isEmpty) {
+                        return@addOnSuccessListener
+                    }
+                    val user = result.documents[0].toObject(User::class.java)
+                    if (user != null) {
+                        if (user.routeId != null) {
+                            cb(true)
+                        } else {
+                            cb(false)
+                        }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.w("error", "Error getting documents.", exception)
+                }
+        } catch (e: java.lang.NullPointerException) {
+            Log.e("routes:service", e.message.toString())
+        }
+    }
+
+
+
 
 
 
