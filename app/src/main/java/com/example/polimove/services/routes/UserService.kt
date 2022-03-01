@@ -13,46 +13,6 @@ class UserService {
     companion object {
 
         private lateinit var auth: FirebaseAuth
-        /*
-        fun getData(cedula: String?, cb: (user: User) -> Unit): Unit {
-            val firestore = FirebaseFirestore.getInstance()
-            firestore
-                .collection("usuarios")
-                .whereEqualTo("cedula", cedula)
-                .get()
-                .addOnSuccessListener { result ->
-                    for (document in result) {
-                        var nameUser = document.toObject(User::class.java)
-                        nameUser.name = document["name"].toString()
-                        nameUser.lastName = document["lastName"].toString()
-                        nameUser.routeId = document["routeId"].toString()
-                        nameUser.email = document["email"].toString()
-                        cb(nameUser)
-                    }
-                }
-        }*/
-        /*
-        fun getRouteName(rutaId: String?,cb: (nameRoute: String) -> Unit) : Unit{
-            val firestore = FirebaseFirestore.getInstance()
-            firestore
-                .collection("routes")
-                .get()
-                .addOnSuccessListener { result ->
-                    for (document in result){
-                        var route = document.toObject(User::class.java)
-                        if (route != null){
-                            route.routeId = document.id
-                            if (route.routeId.equals(rutaId)){
-                                var routename = document.data["name"].toString()
-                                cb(routename)
-                            }
-                        }
-
-
-                    }
-
-                }
-        }*/
 
         fun getUserId(cedula: String?): Unit{
             val firestore = FirebaseFirestore.getInstance()
@@ -78,7 +38,6 @@ class UserService {
 
         }
 
-
         fun getDriverData(cedula: String, cb: (user: User) -> Unit): Unit {
             val firestore = FirebaseFirestore.getInstance()
             firestore
@@ -99,12 +58,6 @@ class UserService {
         fun signOff(){
             Firebase.auth.signOut()
         }
-
-
-
-
-
-
 
     }
 }

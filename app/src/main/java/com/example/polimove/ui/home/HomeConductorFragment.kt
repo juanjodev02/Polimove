@@ -1,16 +1,15 @@
 package com.example.polimove.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import com.example.polimove.R
-import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.databinding.FragmentHomeConductorBinding
-import com.google.zxing.integration.android.IntentIntegrator
 
 
 class HomeConductorFragment : Fragment() {
@@ -32,7 +31,18 @@ class HomeConductorFragment : Fragment() {
         _binding = FragmentHomeConductorBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        buttonAgregarPasajaero.setOnClickListener {
+            val fragment: Fragment = HomeConductorFragment()
+            val fragmentManager:FragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(android.R.id., fragment)
+            fragmentTransaction.addToBackStack(null)
+
+            fragmentTransaction.commit()
+        }
+
         return root
+
     }
 
 

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import com.example.polimove.databinding.FragmentHomeDriverqrBinding
@@ -40,7 +39,8 @@ class HomeDriverQRFragment: Fragment() {
         textViewNameStd = binding.textViewNameStd
 
         buttonContinuar.setOnClickListener {
-            getActivity()?.onBackPressed()
+            //getActivity()?.onBackPressed()
+
         }
 
         return root
