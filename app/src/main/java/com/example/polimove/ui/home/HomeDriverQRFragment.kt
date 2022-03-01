@@ -46,7 +46,8 @@ class HomeDriverQRFragment: Fragment() {
                 Key, result ->
             cedulaStudent = result.getString("cedula")
             Log.d("CI", "La cédula: $cedulaStudent")
-            UserService.getUserId(cedulaStudent as String) {
+            UserService.getData(cedulaStudent as String) {nameUser->
+                textViewNameStd.text= nameUser.name+" "+nameUser.lastName
             }
         })
         return root
