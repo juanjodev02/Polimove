@@ -1,24 +1,26 @@
 package com.example.polimove.ui.login
 
 
-import androidx.lifecycle.Observer
-
-import androidx.fragment.app.Fragment
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.example.polimove.MainActivity
 import com.example.polimove.R
 import com.example.polimove.databinding.FragmentLoginBinding
 import com.example.polimove.sharedPreferences.*
 import com.example.polimove.ui.register.SignInFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class LoginFragment : Fragment() {
@@ -84,7 +86,7 @@ class LoginFragment : Fragment() {
         editTextTextPassword.addTextChangedListener(afterTextChangedListener)
         editTextTextPassword.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                loginViewModel.login(
+                login(
                     editTextNumberCedula.text.toString(),
                     editTextTextPassword.text.toString()
                 )
@@ -94,7 +96,7 @@ class LoginFragment : Fragment() {
 
         buttonIniciarSesion.setOnClickListener {
             GuardarDatosEnPreferencias(editTextNumberCedula, editTextTextPassword,checkBoxRecordarme)
-            loginViewModel.login(
+            login(
                 editTextNumberCedula.text.toString(),
                 editTextTextPassword.text.toString()
             )
@@ -152,6 +154,43 @@ class LoginFragment : Fragment() {
         val cedula = sharedPref?.getString(LOGIN_KEY,"").toString()
         val clave = sharedPref?.getString(PASSWORD_KEY,"").toString()
         return (cedula to clave)
+    }
+
+    fun login(cedula: String, password: String) {
+        inicioSesionConCedula(cedula,password)
+    }
+
+    //Función para autenticarse con email y contraseña
+    fun auth(email:String,password: String){
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener{
+            if(it.isSuccessful){
+                val intent = Intent(activity, MainActivity::class.java)
+                startActivity(intent)
+            }
+            else{
+                Log.d("TAG","No se ha accedido")
+                Toast.makeText(context,"Tus credenciales son incorrectas",Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun inicioSesionConCedula(cedula:String,password: String){
+        var encontrado  = ""
+        val db = Firebase.firestore
+        db.collection("usuarios")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    if(document.data["cedula"]?.equals(cedula) == true){
+                        encontrado=document.data["email"].toString()
+                        auth(encontrado,password)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("TAG", "Hay un error con sus credenciales")
+            }
+
     }
 
 

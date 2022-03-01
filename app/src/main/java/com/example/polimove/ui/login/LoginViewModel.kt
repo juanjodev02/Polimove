@@ -14,40 +14,7 @@ class LoginViewModel() : ViewModel() {
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-      fun login(cedula: String, password: String) {
-          inicioSesionConCedula(cedula,password)
-    }
 
-    //Función para autenticarse con email y contraseña
-    fun auth(email:String,password: String){
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener{
-                if(it.isSuccessful){
-                    Log.d("TAG","Se ha autenticado")
-                }
-                else{
-                    Log.d("TAG","No se ha accedido")
-                }
-            }
-    }
-
-   fun inicioSesionConCedula(cedula:String,password: String){
-        var encontrado  = ""
-        val db = Firebase.firestore
-        db.collection("usuarios")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    if(document.data["cedula"]?.equals(cedula) == true){
-                       encontrado=document.data["email"].toString()
-                        auth(encontrado,password)
-                    }
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("TAG", "Hay un error con sus credenciales")
-            }
-
-    }
 
 
     //Debido a que nuestro login es con cedula, se tiene que obtener los datos

@@ -82,7 +82,7 @@
             android:layout_marginTop="12dp"
             android:autofillHints=""
             android:ems="10"
-            android:hint="@string/seis_o_m_s_caracteres"
+            android:hint="@string/_9_o_mas_caracteres"
             android:inputType="textPassword"
             android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
