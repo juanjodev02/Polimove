@@ -74,7 +74,7 @@ class ProfileFragment : Fragment() {
         val textViewNomCompletoEst: TextView = binding.textViewEstName
         profileViewModel.fullNameStd.observe(viewLifecycleOwner) {
             textViewNomCompletoEst.text = it
-        }
+        }*/
 
         buttonEliminar.setOnClickListener{
             UserService.getUserId(cedula)
@@ -86,12 +86,33 @@ class ProfileFragment : Fragment() {
         val textViewCorreoEst: TextView = binding.textViewEstEmail
         profileViewModel.emailStd.observe(viewLifecycleOwner) {
             textViewCorreoEst.text = it
+        }*/
+
+        buttonSignOut = binding.buttonContinuar
+        buttonDelete = binding.buttonEliminarDatos
+        /*profileViewModel.numberStd.observe(viewLifecycleOwner) {
+            textViewCelularEst.text = it
+        }*/
+
+        parentFragmentManager.setFragmentResultListener("key",this, FragmentResultListener {
+                Key, result ->
+            cedula = result.getString("cedula")
+            Log.d("CI", "La cédula: $cedula")
+            UserService.getData(cedula as String) { nameUser ->
+                textViewName.text = nameUser.name + " " + nameUser.lastName
+                textViewEmail.text = nameUser.email
+            }
+        })
+
+        buttonSignOut.setOnClickListener {
+            UserService.signOff()
+        }
+        buttonDelete.setOnClickListener {
+            UserService.getUserId(cedula)
+            val activity: Activity? = activity
+            Toast.makeText(activity, "Datos eliminados exitosamente.", Toast.LENGTH_LONG)
         }
 
-        val textViewCelularEst: TextView = binding.textViewEstTelefono
-        profileViewModel.numberStd.observe(viewLifecycleOwner) {
-            textViewCelularEst.text = it
-        }
         return root
     }
 

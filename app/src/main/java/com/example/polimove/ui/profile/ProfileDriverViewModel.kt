@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ProfileDriverViewModel: ViewModel() {
+    /*
     private val _fullNameD = MutableLiveData<String>().apply {
         value = "JUAN JOSÉ JARAMILLO CAJAMARCA"
     }
@@ -17,4 +18,6 @@ class ProfileDriverViewModel: ViewModel() {
         value = "0998482373"
     }
    val numberDriver:LiveData<String> = _numberD
+
+     */
 }
