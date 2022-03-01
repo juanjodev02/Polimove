@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.polimove.R
 import com.example.polimove.databinding.FragmentRoutesBinding
 import com.example.polimove.services.routes.RoutesService
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RoutesFragment : Fragment() {
 
@@ -31,7 +32,9 @@ class RoutesFragment : Fragment() {
         val root: View = binding.root
         routesList = binding.routesListView;
 
-        RoutesService.getAllRoutes { routes ->
+        val firestore = FirebaseFirestore.getInstance()
+
+        RoutesService.getAllRoutes (firestore) { routes ->
             routesList.adapter = ArrayAdapter(
                 activity as Context,
                 android.R.layout.simple_list_item_1,

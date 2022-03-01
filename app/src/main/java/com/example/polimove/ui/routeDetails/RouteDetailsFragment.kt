@@ -9,9 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.polimove.databinding.FragmentRouteDetailsBinding
 import com.example.polimove.services.routes.RoutesService
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 private const val ROUTE_NAME_PARAM = "routeName"
@@ -21,6 +24,7 @@ class RouteDetails : Fragment() {
     private val binding get() = _binding!!
 
     private var routeName: String? = ""
+    private lateinit var routeId: String
     private lateinit var titleTextView: TextView
     private lateinit var stopsListView: ListView
     private lateinit var registerButton: Button
@@ -36,20 +40,29 @@ class RouteDetails : Fragment() {
 
         if (routeName == null) {
             val activity: Activity? = activity
-            Toast.makeText(activity, "No se tiene los datos necesarios para mostrar una ruta.", Toast.LENGTH_LONG)
+            Toast.makeText(activity, "No se tiene los datos necesarios para mostrar una ruta.", Toast.LENGTH_LONG).show()
         }
 
-        RoutesService.getRouteByName(routeName as String) { route ->
-            Log.println(Log.ASSERT, "1", route.name as String)
+        val firestore = FirebaseFirestore.getInstance()
+
+        RoutesService.getRouteByName(firestore, routeName as String) { route ->
+            this.routeId = route.id.toString()
             stopsListView.adapter = ArrayAdapter(
                 activity as Context,
                 R.layout.simple_list_item_1,
                 route.stops!!
             )
-        }
 
-        registerButton.setOnClickListener {
-            this.onClickRegisterButton()
+            RoutesService.checkIfUserHasARouteAttached(firestore,"1722951165") { hasRouteAttached ->
+                if (hasRouteAttached) {
+                    this.registerButton.visibility = View.GONE
+                } else {
+                    this.registerButton.visibility = View.VISIBLE
+                }
+                registerButton.setOnClickListener {
+                    this.onClickRegisterButton()
+                }
+            }
         }
 
         val root: View = binding.root
@@ -58,7 +71,10 @@ class RouteDetails : Fragment() {
         return root
     }
 
-    fun onClickRegisterButton () {
-
+    private fun onClickRegisterButton () {
+        val firestore = FirebaseFirestore.getInstance()
+        RoutesService.attachUserToRoute(firestore, this.routeId, "1722951165") { user ->
+            findNavController().navigate(com.example.polimove.R.id.action_routeDetails_to_navigation_home)
+        }
     }
 }
