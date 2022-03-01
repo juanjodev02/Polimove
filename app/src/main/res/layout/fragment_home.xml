@@ -9,26 +9,20 @@
     <TextView
         android:id="@+id/text_home"
         android:layout_width="0dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
         android:textAlignment="center"
         android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewEmoji"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="25dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
-        app:layout_constraintStart_toEndOf="@+id/text_home"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textViewNombreRuta"
@@ -82,38 +76,40 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/textViewHorarioMatutino" />
 
-    <TextView
-        android:id="@+id/textViewQRCODE"
-        android:layout_width="188dp"
-        android:layout_height="162dp"
-        android:layout_marginTop="24dp"
-        android:text="QRCODE"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHorarioNoche" />
 
     <TextView
         android:id="@+id/textViewCode"
         android:layout_width="288dp"
         android:layout_height="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:textAlignment="center"
         android:textColor="#8F9090"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewQRCODE" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewQRCODE" />
 
     <TextView
         android:id="@+id/textViewMensaje"
         android:layout_width="286dp"
         android:layout_height="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="@string/mensaje_escanear"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCode" />
+
+    <ImageView
+        android:id="@+id/imageViewQRCODE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@android:drawable/sym_def_app_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHorarioNoche" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

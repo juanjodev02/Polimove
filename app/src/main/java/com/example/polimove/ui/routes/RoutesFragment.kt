@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.polimove.R
+import androidx.lifecycle.ViewModelProvider
 import com.example.polimove.databinding.FragmentRoutesBinding
 import com.example.polimove.services.routes.RoutesService
 import com.google.firebase.firestore.FirebaseFirestore
