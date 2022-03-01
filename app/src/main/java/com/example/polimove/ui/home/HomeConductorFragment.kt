@@ -1,6 +1,7 @@
 package com.example.polimove.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.polimove.R
 import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.databinding.FragmentHomeConductorBinding
+import com.example.polimove.services.users.UserService
+import com.example.polimove.sharedPreferences.LOGIN_KEY
+import com.example.polimove.sharedPreferences.PASSWORD_KEY
+import com.example.polimove.sharedPreferences.SHAREDINFO_FILENAME
 
 private const val USER_CI_PARAM = "1751438498"
 class HomeConductorFragment : Fragment() {
@@ -30,22 +35,25 @@ class HomeConductorFragment : Fragment() {
     ): View? {
 
         _binding = FragmentHomeConductorBinding.inflate(inflater, container, false)
-        //cedula = arguments?.getString(USER_CI_PARAM)
-        cedula="1751438498"
         val root: View = binding.root
         nameTextView = binding.textHome
         textViewRuta = binding.textViewNombreRuta
         buttonAgregarPasajero = binding.buttonAgregarPasajero
 
+        val listadoLeido = ReadInformation()
+        if(listadoLeido?.first != null){
+            Log.d("cedula", this.cedula.toString())
+            UserService.getData(this.cedula) { nameUser ->
+                nameTextView.text = "¡Hola! "+String(Character.toChars(0x1F44B))+" "+nameUser.name +" "+nameUser.lastName
 
-        UserService.getData(cedula as String) { nameUser ->
-            nameTextView.text = "¡Hola! "+String(Character.toChars(0x1F44B))+" "+nameUser.name +" "+nameUser.lastName
+                UserService.getRouteName(nameUser.routeId){routename ->
+                    textViewRuta.text = "Tu ruta es: "+routename
+                }
 
-            UserService.getRouteName(nameUser.routeId){routename ->
-                textViewTitulo.text = "Tu ruta es: "+routename
             }
-
         }
+
+
 
         buttonAgregarPasajero.setOnClickListener{
             //ir a pantalla escanear QR
@@ -56,6 +64,12 @@ class HomeConductorFragment : Fragment() {
         return root
     }
 
+    fun ReadInformation():Pair<String,String>{
+        val sharedPref = context?.getSharedPreferences(SHAREDINFO_FILENAME.toString(),0)
+        val cedula = sharedPref?.getString(LOGIN_KEY,"").toString()
+        val clave = sharedPref?.getString(PASSWORD_KEY,"").toString()
+        return (cedula to clave)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
