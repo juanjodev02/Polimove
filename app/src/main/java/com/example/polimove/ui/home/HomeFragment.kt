@@ -3,6 +3,7 @@ package com.example.polimove.ui.home
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var textViewTitulo: TextView
     private lateinit var imageViewQRCODE: ImageView
     private lateinit var layoutNoRoute: LinearLayout
+    private lateinit var hasRouteLayout: LinearLayout
     private lateinit var imageViewPolibus: ImageView
     private lateinit var textViewHM: TextView
     private lateinit var textViewHN: TextView
@@ -55,46 +57,33 @@ class HomeFragment : Fragment() {
         textViewMensaje = binding.textViewMensaje
         layoutNoRoute = binding.noRoute
         buttonReservarRuta = binding.buttonReservarRuta
+        hasRouteLayout = binding.hasRouteLayout
 
 
         UserService.getData(cedula as String) { nameUser ->
-            nameTextView.text =
-                "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
-
-            UserService.getRouteName(nameUser.routeId) { routename ->
-                textViewTitulo.text = "Tu ruta es: " + routename
-            }
-
-        }
-
-        try {
-            val barcodeEncoder = BarcodeEncoder()
-            val bitmap = barcodeEncoder.encodeBitmap(cedula, BarcodeFormat.QR_CODE, 400, 400)
-            imageViewQRCODE.setImageBitmap(bitmap)
-        } catch (e: Exception) {
-
-        }
-
-
-        val firestore = FirebaseFirestore.getInstance()
-        UserService.checkIfUserHasARouteAttached(firestore,"1722951167") { hasRouteAttached ->
-            if (hasRouteAttached) {
-                this.textViewTitulo.visibility = View.VISIBLE
-                imageViewQRCODE.visibility = View.VISIBLE
-                imageViewPolibus.visibility = View.VISIBLE
-                textViewHM.visibility = View.VISIBLE
-                textViewHN.visibility = View.VISIBLE
-                textViewMensaje.visibility = View.VISIBLE
-                this.layoutNoRoute.visibility = View.GONE
-
-            } else {
+            if (nameUser.routeId == null || nameUser.routeId.equals("")) {
                 this.layoutNoRoute.visibility = View.VISIBLE
+            } else {
+                this.hasRouteLayout.visibility = View.VISIBLE
+                nameTextView.text =
+                    "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
+
+                UserService.getRouteName(nameUser.routeId) { routename ->
+                    textViewTitulo.text = "Tu ruta es: " + routename
+                }
+
+                try {
+                    val barcodeEncoder = BarcodeEncoder()
+                    val bitmap = barcodeEncoder.encodeBitmap(cedula, BarcodeFormat.QR_CODE, 400, 400)
+                    imageViewQRCODE.setImageBitmap(bitmap)
+                } catch (e: Exception) {
+
+                }
+
+                buttonReservarRuta.setOnClickListener(){
+                    findNavController().navigate(com.example.polimove.R.id.action_home_to_Routes)
+                }
             }
-
-        }
-
-        buttonReservarRuta.setOnClickListener(){
-            findNavController().navigate(com.example.polimove.R.id.action_home_to_Routes)
         }
 
         return root
