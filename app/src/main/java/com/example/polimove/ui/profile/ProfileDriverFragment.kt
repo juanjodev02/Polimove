@@ -37,7 +37,7 @@ class ProfileDriverFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileDriverBinding.inflate(inflater,container,false)
-        //_binding = FragmentProfileBinding.inflate(inflater, container, false)
+
         val root: View = binding.root
 
         textViewNameDriver= binding.textViewDriverName

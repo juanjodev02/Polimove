@@ -21,9 +21,7 @@ class HomeDriverQRFragment: Fragment() {
     private val binding get() = _binding!!
 
     //INICIALIZACIÓN DE VARIABLES
-    //private lateinit var textViewQRCode: TextView
     private lateinit var textViewNameStd: TextView
-    //private lateinit var textViewNumberAsiento: TextView
     private lateinit var buttonContinuar: Button
 
      override fun onCreate(savedInstanteSate: Bundle?) {
