@@ -37,7 +37,7 @@ class HomeConductorFragment : Fragment() {
         textViewRuta = binding.textViewNombreRuta
         buttonAgregarPasajero = binding.buttonAgregarPasajero
 
-        /*
+
         UserService.getData(cedula as String) { nameUser ->
             nameTextView.text = "¡Hola! "+String(Character.toChars(0x1F44B))+" "+nameUser.name +" "+nameUser.lastName
 
@@ -46,7 +46,7 @@ class HomeConductorFragment : Fragment() {
             }
 
         }
-*/
+
         buttonAgregarPasajero.setOnClickListener{
             //ir a pantalla escanear QR
         }
