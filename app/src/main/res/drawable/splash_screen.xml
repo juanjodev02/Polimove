@@ -5,10 +5,4 @@
         <bitmap android:src="@drawable/epn_logo_250x152"
             android:gravity="center"/>
     </item>
-<!--    <item android:top="210dp">-->
-<!--        <bitmap-->
-<!--            android:gravity="center"-->
-<!--            android:tint="@android:color/black"-->
-<!--            android:src="@drawable/polimove"/>-->
-<!--    </item>-->
 </layer-list>

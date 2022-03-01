@@ -1,18 +1,22 @@
-package com.example.polimove.ui.login
+package com.example.polimove.ui.loginConductor
 
+import android.content.Intent
+import android.os.Handler
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.polimove.MainActivity
 import com.example.polimove.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class LoginViewModel() : ViewModel() {
+class LoginViewModelConductor() : ViewModel() {
 
-    private val _loginForm = MutableLiveData<LoginFormState>()
-    val loginFormState: LiveData<LoginFormState> = _loginForm
+    private val _loginFormConductor = MutableLiveData<LoginFormStateConductor>()
+    val loginFormStateConductor: LiveData<LoginFormStateConductor> = _loginFormConductor
 
 
 
@@ -20,11 +24,11 @@ class LoginViewModel() : ViewModel() {
     //del usuario, si existe, buscara su correo para poder authenticarse
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
-            _loginForm.value = LoginFormState(cedulaError = R.string.invalid_cedula)
+            _loginFormConductor.value = LoginFormStateConductor(cedulaError = R.string.invalid_cedula)
         } else if (!isPasswordValid(password)) {
-            _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
+            _loginFormConductor.value = LoginFormStateConductor(passwordError = R.string.invalid_password)
         } else {
-            _loginForm.value = LoginFormState(isDataValid = true)
+            _loginFormConductor.value = LoginFormStateConductor(isDataValid = true)
         }
     }
 

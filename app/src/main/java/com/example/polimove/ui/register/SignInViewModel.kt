@@ -101,47 +101,5 @@ class SignInViewModel(): ViewModel() {
         return false
     }
 
-    fun registro(cedula:String,email:String,password: String){
-        val db = Firebase.firestore
 
-
-        db.collection("estudiantes")
-            .get()
-            .addOnSuccessListener { result->
-                for(document in result){
-                    if(document.data["ci"]?.equals(cedula)==true){
-                        val user = hashMapOf(
-                            "cedula" to cedula,
-                            "contrasena" to password,
-                            "email" to email,
-                            "name" to document.data["name"].toString(),
-                            "lastName" to document.data["lastName"].toString()
-                        )
-                        db.collection("usuarios")
-                            .add(user)
-                            .addOnSuccessListener { documentReference ->
-                                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener{
-                                    if(it.isSuccessful){
-                                        Log.d(TAG, "Registro copletado exitosamente")
-                                    }
-                                    else{
-                                        Log.d(TAG, "No se pudo crear el usuario")
-                                    }
-
-                                }
-                            }
-                            .addOnFailureListener { e ->
-                                Log.w(TAG, "Error adding document", e)
-                            }
-                    }
-                }
-            }.addOnFailureListener { exception ->
-                Log.w("TAG", "Hay un error con su registro", exception)
-            }
-
-
-
-
-
-    }
 }

@@ -1,38 +1,34 @@
-package com.example.polimove.ui.login
+package com.example.polimove.ui.loginConductor
 
 
-import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.Observer
-
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.*
-import com.example.polimove.Login
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.polimove.MainActivity
-
-
-import com.example.polimove.R
-import com.example.polimove.databinding.FragmentLoginBinding
-import com.example.polimove.sharedPreferences.*
-import com.example.polimove.ui.register.SignInFragment
+import com.example.polimove.databinding.FragmentLoginConductorBinding
+import com.example.polimove.sharedPreferences.LOGIN_KEY
+import com.example.polimove.sharedPreferences.PASSWORD_KEY
+import com.example.polimove.sharedPreferences.SHAREDINFO_FILENAME
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
-class LoginFragment : Fragment() {
+class LoginFragmentConductor : Fragment() {
 
-    private lateinit var loginViewModel: LoginViewModel
-    private var _binding: FragmentLoginBinding? = null
+    private lateinit var loginViewModelConductor: LoginViewModelConductor
+    private var _binding: FragmentLoginConductorBinding? = null
 
     private val binding get() = _binding!!
 
@@ -42,34 +38,33 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding =FragmentLoginBinding.inflate(inflater, container, false)
+        _binding =FragmentLoginConductorBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginViewModel = LoginViewModel()
+        loginViewModelConductor = LoginViewModelConductor()
 
         val editTextNumberCedula = binding.editTextNumberCedula
         val editTextTextPassword = binding.editTextTextPassword
         val buttonIniciarSesion = binding.buttonIniciarSesion
-        val buttonCrearCuenta = binding.buttonCrearCuenta
         val checkBoxRecordarme = binding.checkBoxGuardarInformacion
 
 
         //LEEMOS LOS DATOS DESDE EL SHARED PREFERENCES
         LeerDatosDePreferencias(editTextNumberCedula,editTextTextPassword,checkBoxRecordarme)
 
-        loginViewModel.loginFormState.observe(viewLifecycleOwner,
-            Observer { loginFormState ->
-                if (loginFormState == null) {
+        loginViewModelConductor.loginFormStateConductor.observe(viewLifecycleOwner,
+            Observer { loginFormStateConductor ->
+                if (loginFormStateConductor == null) {
                     return@Observer
                 }
-                buttonIniciarSesion.isEnabled = loginFormState.isDataValid
-                loginFormState.cedulaError?.let {
+                buttonIniciarSesion.isEnabled = loginFormStateConductor.isDataValid
+                loginFormStateConductor.cedulaError?.let {
                     editTextNumberCedula.error = getString(it)
                 }
-                loginFormState.passwordError?.let {
+                loginFormStateConductor.passwordError?.let {
                     editTextTextPassword.error = getString(it)
                 }
             })
@@ -82,7 +77,7 @@ class LoginFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable) {
-                loginViewModel.loginDataChanged(
+                loginViewModelConductor.loginDataChanged(
                     editTextNumberCedula.text.toString(),
                     editTextTextPassword.text.toString()
                 )
@@ -106,22 +101,9 @@ class LoginFragment : Fragment() {
                 editTextNumberCedula.text.toString(),
                 editTextTextPassword.text.toString()
             )
+
         }
 
-        buttonCrearCuenta.setOnClickListener{
-            var loginView = true
-            val fragmentoActivo: Fragment
-            if (loginView){
-                fragmentoActivo = SignInFragment()
-            }
-            else
-                fragmentoActivo = LoginFragment()
-            loginView = !loginView
-            activity?.supportFragmentManager
-                ?.beginTransaction()
-                ?.replace(R.id.fragmentContainerView, fragmentoActivo)
-                ?.commit()
-        }
 
     }
 
@@ -162,7 +144,6 @@ class LoginFragment : Fragment() {
         return (cedula to clave)
     }
 
-
     fun login(cedula: String, password: String){
         inicioSesionConCedula(cedula,password)
     }
@@ -171,7 +152,7 @@ class LoginFragment : Fragment() {
         var encontrado  = ""
 
         val db = Firebase.firestore
-        db.collection("usuarios")
+        db.collection("conductores")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
@@ -182,8 +163,7 @@ class LoginFragment : Fragment() {
                 }
             }
             .addOnFailureListener { exception ->
-                Log.d("TAG","No se ha accedido")
-
+                Log.w("TAG", "Hay un error con sus credenciales")
             }
 
 
@@ -197,14 +177,12 @@ class LoginFragment : Fragment() {
                 startActivity(intent)
             }
             else{
-
-                Log.d("TAG","No se ha autenticado")
-                Toast.makeText(context, "Tus credenciales no son validas", Toast.LENGTH_LONG).show();
-
-
+                Log.d("TAG","No se ha accedido")
+                Toast.makeText(context, "Sus credenciales no son correctas", Toast.LENGTH_LONG).show()
             }
         }
     }
+
 
 
     override fun onDestroyView() {
