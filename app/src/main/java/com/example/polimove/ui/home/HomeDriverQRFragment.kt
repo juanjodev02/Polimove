@@ -1,12 +1,14 @@
 package com.example.polimove.ui.home
 
-import android.app.Activity
+import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.polimove.databinding.FragmentHomeDriverqrBinding
 import com.google.zxing.integration.android.IntentIntegrator
@@ -66,7 +68,21 @@ class HomeDriverQRFragment: Fragment() {
                 integrador.setBarcodeImageEnabled(true)
                 integrador.initiateScan()
             }
-        })
+        }
+
+        fun onActivityResult(requestCode: init, resultCode: Int, data: Intent?) {
+            val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if (result != null) {
+                if (result.contents == null) {
+                    Toast.makeText(activity, "Lectura Cancelada", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(activity, result.contents, Toast.LENGTH_LONG).show()
+                    textViewNameStd.setText(result.contents)
+                }
+            } else {
+                super.onActivityResult(requestCode, resultCode, data)
+            }
+        }
 
 /*
         val QR: TextView = binding.textViewQRCODE
@@ -91,3 +107,5 @@ class HomeDriverQRFragment: Fragment() {
         _binding = null
     }
 }
+
+
