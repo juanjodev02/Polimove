@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.polimove.R
 import com.example.polimove.databinding.FragmentHomeConductorBinding
 
 
@@ -38,7 +39,7 @@ class HomeConductorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonAgregarPasajaero.setOnClickListener{
-            findNavController().navigate(android.R.id.action_Home_no_route_to_Routes)
+            findNavController().navigate(R.id.action_home_conductor_to_home_driverqr)
         }
     }
 
