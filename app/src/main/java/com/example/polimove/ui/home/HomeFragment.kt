@@ -14,6 +14,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentResultListener
 import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.services.user.UserService
+import com.example.polimove.sharedPreferences.LOGIN_KEY
+import com.example.polimove.sharedPreferences.PASSWORD_KEY
+import com.example.polimove.sharedPreferences.SHAREDINFO_FILENAME
 import com.example.polimove.ui.profile.ProfileFragment
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -38,20 +41,23 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        cedula = "1722951165"
         val root: View = binding.root
         nameTextView = binding.textHome
         textViewTitulo = binding.textViewNombreRuta
         imageViewQRCODE = binding.imageViewQRCODE
 
-        UserService.getData(cedula as String) { nameUser ->
-            nameTextView.text =
-                "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
+        val listadoLeido = this.readInformation()
+        if(listadoLeido?.first != null){
+            this.cedula = listadoLeido.first
+            UserService.getData(this.cedula) { nameUser ->
+                nameTextView.text =
+                    "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
 
-            UserService.getRouteName(nameUser.routeId) { routename ->
-                textViewTitulo.text = "Tu ruta es: " + routename
+                UserService.getRouteName(nameUser.routeId) { routename ->
+                    textViewTitulo.text = "Tu ruta es: " + routename
+                }
+
             }
-
         }
 
         try {
@@ -65,11 +71,17 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    fun readInformation():Pair<String,String>{
+        val sharedPref = context?.getSharedPreferences(SHAREDINFO_FILENAME.toString(),0)
+        val cedula = sharedPref?.getString(LOGIN_KEY,"").toString()
+        val clave = sharedPref?.getString(PASSWORD_KEY,"").toString()
+        return (cedula to clave)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val datosAEnviar = Bundle()
-        datosAEnviar.putString("cedula", "1722951165").toString().trim()
+        datosAEnviar.putString("cedula", this.cedula).toString().trim()
         parentFragmentManager.setFragmentResult("key",datosAEnviar)
     }
 

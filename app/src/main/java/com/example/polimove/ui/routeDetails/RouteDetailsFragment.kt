@@ -14,6 +14,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.polimove.databinding.FragmentRouteDetailsBinding
 import com.example.polimove.services.routes.RoutesService
+import com.example.polimove.sharedPreferences.LOGIN_KEY
+import com.example.polimove.sharedPreferences.PASSWORD_KEY
+import com.example.polimove.sharedPreferences.SHAREDINFO_FILENAME
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -28,6 +31,7 @@ class RouteDetails : Fragment() {
     private lateinit var titleTextView: TextView
     private lateinit var stopsListView: ListView
     private lateinit var registerButton: Button
+    private var cedula: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,14 +57,18 @@ class RouteDetails : Fragment() {
                 route.stops!!
             )
 
-            RoutesService.checkIfUserHasARouteAttached(firestore,"1722951165") { hasRouteAttached ->
-                if (hasRouteAttached) {
-                    this.registerButton.visibility = View.GONE
-                } else {
-                    this.registerButton.visibility = View.VISIBLE
-                }
-                registerButton.setOnClickListener {
-                    this.onClickRegisterButton()
+            val listadoLeido = this.readInformation()
+            if(listadoLeido?.first != null){
+                this.cedula = listadoLeido.first
+                RoutesService.checkIfUserHasARouteAttached(firestore,listadoLeido.first) { hasRouteAttached ->
+                    if (hasRouteAttached) {
+                        this.registerButton.visibility = View.GONE
+                    } else {
+                        this.registerButton.visibility = View.VISIBLE
+                    }
+                    registerButton.setOnClickListener {
+                        this.onClickRegisterButton()
+                    }
                 }
             }
         }
@@ -71,9 +79,16 @@ class RouteDetails : Fragment() {
         return root
     }
 
+    fun readInformation():Pair<String,String>{
+        val sharedPref = context?.getSharedPreferences(SHAREDINFO_FILENAME.toString(),0)
+        val cedula = sharedPref?.getString(LOGIN_KEY,"").toString()
+        val clave = sharedPref?.getString(PASSWORD_KEY,"").toString()
+        return (cedula to clave)
+    }
+
     private fun onClickRegisterButton () {
         val firestore = FirebaseFirestore.getInstance()
-        RoutesService.attachUserToRoute(firestore, this.routeId, "1722951165") { user ->
+        RoutesService.attachUserToRoute(firestore, this.routeId, this.cedula) { user ->
             findNavController().navigate(com.example.polimove.R.id.action_routeDetails_to_navigation_home)
         }
     }
