@@ -31,25 +31,6 @@ class HomeDriverQRFragment: Fragment() {
          IntentIntegrator(activity).initiateScan()
     }
 
-
-    /*
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //new IntentIntegrator(this).initiateScan();
-    }*/
-
-    /*
-    @override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable,  Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        String datos = result.getContents();
-
-    }
-
- */
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,58 +41,13 @@ class HomeDriverQRFragment: Fragment() {
         buttonContinuar = binding.buttonContinuar
         textViewNameStd = binding.textViewNameStd
 
-        /*
-        buttonContinuar.setOnClickListener{
-            //fun onClick(view: View?) {
-                val integrador = IntentIntegrator(this.activity)
-                integrador.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-                integrador.setPrompt("Lecctor - CDP")
-                integrador.setCameraId(0)
-                integrador.setBeepEnabled(true)
-                integrador.setBarcodeImageEnabled(true)
-                integrador.initiateScan()
-            //}
-        }*/
         buttonContinuar.setOnClickListener {
             getActivity()?.onBackPressed()
         }
 
-
-/*
-        val QR: TextView = binding.textViewQRCODE
-        homeViewModel.QRCODEDRIVER.observe(viewLifecycleOwner) {
-            QR.text = it
-        }
-        val numberAsient:TextView = binding.textViewNumberAsiento
-        homeViewModel.numberAsiento.observe(viewLifecycleOwner){
-            numberAsient.text = it
-        }
-        val nameStudent:TextView=binding.textViewNameStd
-        homeViewModel.nameStd.observe(viewLifecycleOwner){
-            nameStudent.text = it
-        }
-
- */
-
-
-
         return root
     }
-    /*
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if (result != null) {
-            if (result.contents == null) {
-                Toast.makeText(activity, "Lectura Cancelada", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(activity, result.contents, Toast.LENGTH_LONG).show()
-                textViewNameStd.setText(result.contents)
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-    */
+
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
@@ -127,7 +63,6 @@ class HomeDriverQRFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
 
 
