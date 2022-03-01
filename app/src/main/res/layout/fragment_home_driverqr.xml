@@ -5,14 +5,32 @@
     android:id="@+id/content_principal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+
     tools:context=".ui.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="267dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTitle2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="0dp"
         android:layout_height="31dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="67dp"
         android:layout_marginEnd="25dp"
         android:text="@string/textViewTitle"
         android:textSize="24sp"
@@ -26,14 +44,14 @@
         android:layout_width="0dp"
         android:layout_height="31dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="31dp"
         android:layout_marginEnd="25dp"
         android:text="Estudiante"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewQRCODE" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_view" />
 
     <TextView
         android:id="@+id/textViewNameStd"
@@ -75,17 +93,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewNameStd" />
 
 
-    <TextView
-        android:id="@+id/textViewQRCODE"
-        android:layout_width="281dp"
-        android:layout_height="272dp"
-        android:layout_marginTop="21dp"
-        android:text="@string/textViewQRCODE"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <Button
         android:id="@+id/buttonContinuar"
@@ -102,4 +109,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAsiento" />
+
+    <SurfaceView
+        android:id="@+id/camera_view"
+        android:layout_width="280dp"
+        android:layout_height="268dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="66dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTitle2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
