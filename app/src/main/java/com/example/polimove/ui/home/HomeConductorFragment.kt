@@ -42,8 +42,9 @@ class HomeConductorFragment : Fragment() {
 
         val listadoLeido = ReadInformation()
         if(listadoLeido?.first != null){
+            this.cedula = listadoLeido.first
             Log.d("cedula", this.cedula.toString())
-            UserService.getData(this.cedula) { nameUser ->
+            UserService.getDriverData(this.cedula.toString()) { nameUser ->
                 nameTextView.text = "¡Hola! "+String(Character.toChars(0x1F44B))+" "+nameUser.name +" "+nameUser.lastName
 
                 UserService.getRouteName(nameUser.routeId){routename ->
