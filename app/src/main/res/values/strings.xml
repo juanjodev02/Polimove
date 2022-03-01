@@ -17,4 +17,45 @@
     <string name="reservar_ruta">Reservar ruta</string>
     <string name="agregar_pasajero">+</string>
     <string name="mensaje_nuevo_pasajero">Nuevo pasajero</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="escudo_epn_con_nombre_en_letras">Escudo EPN con nombre en letras</string>
+    <string name="polimove">Polimove</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_cedula">Cédula invalida</string>
+    <string name="invalid_password">La contraseña debe ser mayor a 8 caracteres</string>
+    <string name="invalid_email">Email invalido</string>
+    <string name="login_failed">El Log-in ha fallado</string>
+    <string name="escudo_de_la_epn">Escudo de la EPN</string>
+    <string name="accede_a_tu_cuenta">Accede a tu Cuenta</string>
+    <string name="rol">Rol</string>
+    <string name="n_mero_de_identificaci_n">Número de Identificación</string>
+    <string name="_1721791771">1721791771</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="seis_o_m_s_caracteres">Seis o Más Caracteres</string>
+    <string name="iniciar_sesi_n">Iniciar Sesión</string>
+    <string name="o">o</string>
+    <string name="crear_cuenta">Crear Cuenta</string>
+    <string name="recuperala_aqu">Recuperala aquí</string>
+    <string name="olvidaste_la_contrase_a">¿Olvidaste la contraseña?</string>
+    <string name="registro">Registro</string>
+    <string name="correo_institucional">Correo Institucional</string>
+    <string name="email_epn_edu_ec">email@epn.edu.ec</string>
+    <string name="repetir_contrase_a">Repetir Contraseña</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="login">Login</string>
+    <string name="recordarme">Recordarme</string>
+    <string name="_9_o_mas_caracteres">9 o mas caracteres</string>
+
+
+    <!--Para items de menú desplegable de tipo de usuario-->
+    <string-array name="usuarios">
+        <item>Estudiante</item>
+        <item>Conductor</item>
+    </string-array>
 </resources>
