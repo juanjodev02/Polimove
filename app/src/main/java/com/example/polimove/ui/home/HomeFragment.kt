@@ -45,6 +45,9 @@ class HomeFragment : Fragment() {
         textViewTitulo = binding.textViewNombreRuta
         imageViewQRCODE = binding.imageViewQRCODE
 
+        val QR: TextView = binding.textViewQRCODE
+        homeViewModel.QRCODEDRIVER.observe(viewLifecycleOwner) {
+            QR.text = it
         UserService.getData(cedula as String) { nameUser ->
             nameTextView.text =
                 "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
@@ -53,6 +56,14 @@ class HomeFragment : Fragment() {
                 textViewTitulo.text = "Tu ruta es: " + routename
             }
 
+        }
+        val numberAsient:TextView = binding.textViewNumberAsiento
+        homeViewModel.numberAsiento.observe(viewLifecycleOwner){
+            numberAsient.text = it
+        }
+        val nameStudent:TextView=binding.textViewNameStd
+        homeViewModel.nameStd.observe(viewLifecycleOwner){
+            nameStudent.text = it
         }
 
         try {

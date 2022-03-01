@@ -47,6 +47,8 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val profileViewModel =
+            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         //cedula = arguments?.getString(USER_CI_PARAM)
 
@@ -69,6 +71,9 @@ class ProfileFragment : Fragment() {
 
         buttonCerrarSesion.setOnClickListener{
             UserService.signOff()
+        val textViewNomCompletoEst: TextView = binding.textViewEstName
+        profileViewModel.fullNameStd.observe(viewLifecycleOwner) {
+            textViewNomCompletoEst.text = it
         }
 
         buttonEliminar.setOnClickListener{
@@ -77,6 +82,16 @@ class ProfileFragment : Fragment() {
             Toast.makeText(activity, "Datos eliminados exitosamente.", Toast.LENGTH_LONG)
         }
 
+
+        val textViewCorreoEst: TextView = binding.textViewEstEmail
+        profileViewModel.emailStd.observe(viewLifecycleOwner) {
+            textViewCorreoEst.text = it
+        }
+
+        val textViewCelularEst: TextView = binding.textViewEstTelefono
+        profileViewModel.numberStd.observe(viewLifecycleOwner) {
+            textViewCelularEst.text = it
+        }
         return root
     }
 

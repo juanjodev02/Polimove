@@ -9,8 +9,8 @@ import com.google.firebase.ktx.Firebase
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "¡Hola "
+    private val _QRCODE = MutableLiveData<String>().apply {
+        value = "QRCODE"
     }
     val text: LiveData<String> = _text
 
@@ -35,4 +35,13 @@ class HomeViewModel : ViewModel() {
     val QRCODE: LiveData<String> = _QRCODE
 
 
+    val QRCODEDRIVER: LiveData<String> = _QRCODE
+    private val _nameStd = MutableLiveData<String>().apply {
+        value = "LESLY TIPANLUIZA"
+    }
+    val nameStd: LiveData<String> = _nameStd
+    private val _Asiento = MutableLiveData<String>().apply {
+        value = "12-B"
+    }
+    val numberAsiento: LiveData<String> = _Asiento
 }
