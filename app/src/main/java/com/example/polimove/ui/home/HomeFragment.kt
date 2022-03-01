@@ -38,7 +38,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        //cedula = arguments?.getString(USER_CI_PARAM)
         cedula = "1722951165"
         val root: View = binding.root
         nameTextView = binding.textHome
@@ -62,12 +61,6 @@ class HomeFragment : Fragment() {
         } catch (e: Exception) {
 
         }
-
-/*
-        val textViewQRCODE: TextView = binding.textViewQRCODE
-        homeViewModel.QRCODE.observe(viewLifecycleOwner){
-            textViewQRCODE.text = it
-        }*/
 
         return root
     }

@@ -34,7 +34,6 @@ class HomeNoRouteFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeNoRouteBinding.inflate(inflater, container, false)
 
-        //cedula = arguments?.getString(USER_CI_PARAM)
         cedula="1722951165"
 
         val root: View = binding.root
@@ -47,13 +46,6 @@ class HomeNoRouteFragment : Fragment() {
                 "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
         }
 
-
-
-
-
-
-
-
     return root
     }
 
@@ -64,10 +56,6 @@ class HomeNoRouteFragment : Fragment() {
             findNavController().navigate(R.id.action_Home_no_route_to_Routes)
                }
     }
-
-
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

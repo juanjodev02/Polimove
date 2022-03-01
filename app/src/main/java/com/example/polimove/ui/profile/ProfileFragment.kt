@@ -28,18 +28,6 @@ class ProfileFragment : Fragment() {
     private lateinit var buttonCerrarSesion: Button
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-/*
-        parentFragmentManager.setFragmentResultListener("key",this, FragmentResultListener{
-            key, result ->
-            cedula = result.getString("cedula")
-            Log.d("CI", "La cedula es: $cedula")
-
-        })*/
-    }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +35,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-        //cedula = arguments?.getString(USER_CI_PARAM)
 
         val root: View = binding.root
         textViewNombreCompletoEst = binding.textViewNombreCompletoEst
