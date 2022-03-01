@@ -9,8 +9,9 @@ class HomeDriverQRViewModel: ViewModel(){
         private val _QRCODE = MutableLiveData<String>().apply {
             value = "QRCODE"
         }
-        val QRCODEDRIVER: LiveData<String> = _QRCODE
-        private val _nameStd = MutableLiveData<String>().apply {
+        val QRCODEDRIVER: LiveData<String>
+            get() = _QRCODE
+    private val _nameStd = MutableLiveData<String>().apply {
             value = "LESLY TIPANLUIZA"
         }
         val nameStd: LiveData<String> = _nameStd

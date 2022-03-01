@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import com.example.polimove.databinding.FragmentProfileDriverBinding
@@ -54,13 +55,11 @@ class ProfileDriverFragment : Fragment() {
             }
         })
 
-        buttonSignOutDriver.setOnClickListener {
-            UserService.signOff()
-        }
+        buttonSignOutDriver.setOnClickListener { UserService.signOff() }
         buttonDeleteDriver.setOnClickListener {
             UserService.getUserId(cedulaDriver)
             val activity: Activity? = activity
-            Toast.makeText(activity, "Datos eliminados exitosamente.", Toast.LENGTH_LONG)
+            makeText(activity, "Datos eliminados exitosamente.", Toast.LENGTH_LONG).show()
         }
 
         return root
