@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/new_passenger"
+    android:id="@+id/new_passenger_navigation"
     app:startDestination="@id/new_passenger">
     <fragment
     android:id="@+id/navigation_home_no_route"
