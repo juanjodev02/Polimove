@@ -3,27 +3,25 @@ package com.example.polimove.ui.home
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentResultListener
 import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.services.user.UserService
 import com.example.polimove.sharedPreferences.LOGIN_KEY
 import com.example.polimove.sharedPreferences.PASSWORD_KEY
 import com.example.polimove.sharedPreferences.SHAREDINFO_FILENAME
-import com.example.polimove.ui.profile.ProfileFragment
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import io.grpc.InternalConfigSelector.KEY
+import androidx.navigation.fragment.findNavController
 
 
-private const val USER_CI_PARAM = "1722951165"
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -33,6 +31,9 @@ class HomeFragment : Fragment() {
     private lateinit var nameTextView: TextView
     private lateinit var textViewTitulo: TextView
     private lateinit var imageViewQRCODE: ImageView
+    private lateinit var layoutNoRoute: LinearLayout
+    private lateinit var hasRouteLayout: LinearLayout
+    private lateinit var buttonReservarRuta: Button
 
 
     override fun onCreateView(
@@ -45,29 +46,45 @@ class HomeFragment : Fragment() {
         nameTextView = binding.textHome
         textViewTitulo = binding.textViewNombreRuta
         imageViewQRCODE = binding.imageViewQRCODE
+        layoutNoRoute = binding.noRoute
+        hasRouteLayout = binding.hasRouteLayout
+        buttonReservarRuta = binding.buttonReservarRuta
+
+
+
 
         val listadoLeido = this.readInformation()
-        if(listadoLeido?.first != null){
+        if(listadoLeido?.first != null) {
             this.cedula = listadoLeido.first
             UserService.getData(this.cedula) { nameUser ->
-                nameTextView.text =
-                    "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
 
-                UserService.getRouteName(nameUser.routeId) { routename ->
-                    textViewTitulo.text = "Tu ruta es: " + routename
+                if (nameUser.routeId != null) {
+                    this.hasRouteLayout.visibility = View.VISIBLE
+                    nameTextView.text =
+                        "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
+
+                    UserService.getRouteName(nameUser.routeId.toString()) { routename ->
+                        textViewTitulo.text = "Tu ruta es: " + routename
+                    }
+                    try {
+                        val barcodeEncoder = BarcodeEncoder()
+                        val bitmap = barcodeEncoder.encodeBitmap(cedula, BarcodeFormat.QR_CODE, 400, 400)
+                        imageViewQRCODE.setImageBitmap(bitmap)
+                    } catch (e: Exception) {
+                        Log.d("TAG","Problems generating QRCODE")
+                    }
+
+                }else{
+                    this.layoutNoRoute.visibility = View.VISIBLE
+                    buttonReservarRuta.setOnClickListener(){
+                        findNavController().navigate(com.example.polimove.R.id.action_home_to_Routes)
+                    }
                 }
 
             }
-        }
 
-        try {
-            val barcodeEncoder = BarcodeEncoder()
-            val bitmap = barcodeEncoder.encodeBitmap(cedula, BarcodeFormat.QR_CODE, 400, 400)
-            imageViewQRCODE.setImageBitmap(bitmap)
-        } catch (e: Exception) {
 
         }
-
         return root
     }
 

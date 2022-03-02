@@ -25,36 +25,25 @@ companion object {
             .whereEqualTo("cedula", cedula)
             .get()
             .addOnSuccessListener { result ->
-                for (document in result) {
-                    var nameUser = document.toObject(User::class.java)
-                    nameUser.name = document["name"].toString()
-                    nameUser.lastName = document["lastName"].toString()
-                    nameUser.routeId = document["routeId"].toString()
-                    nameUser.email = document["email"].toString()
+                var nameUser = result.documents[0].toObject(User::class.java)
+
+                if (nameUser != null) {
                     cb(nameUser)
                 }
             }
     }
 
-    fun getRouteName(rutaId: String?,cb: (nameRoute: String) -> Unit) : Unit{
+    fun getRouteName(rutaId: String, cb: (nameRoute: String) -> Unit) : Unit{
         val firestore = FirebaseFirestore.getInstance()
         firestore
             .collection("routes")
+            .document(rutaId)
             .get()
             .addOnSuccessListener { result ->
-                   for (document in result){
-                       var route = document.toObject(User::class.java)
-                       if (route != null){
-                           route.routeId = document.id
-                           if (route.routeId.equals(rutaId)){
-                               var routename = document.data["name"].toString()
-                               cb(routename)
-                           }
-                       }
-
-
-                   }
-
+                var route = result.toObject(User::class.java)
+                if (route != null) {
+                    route.name?.let { cb(it) }
+                }
             }
     }
 
@@ -66,7 +55,7 @@ companion object {
             .get()
             .addOnSuccessListener { result->
                 for(document in result){
-                 var userid = document.id
+                    var userid = document.id
                     deleteUser(userid)
                 }
             }
@@ -83,22 +72,7 @@ companion object {
     }
 
 
-    fun getDriverData(cedula: String, cb: (user: User) -> Unit): Unit {
-        val firestore = FirebaseFirestore.getInstance()
-        firestore
-            .collection("conductores")
-            .whereEqualTo("cedula", cedula)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    var nameUser = document.toObject(User::class.java)
-                    nameUser.name = document["name"].toString()
-                    nameUser.lastName = document["lastName"].toString()
-                    nameUser.routeId = document["routeId"].toString()
-                    cb(nameUser)
-                }
-            }
-    }
+
 
     fun signOff(){
         Firebase.auth.signOut()

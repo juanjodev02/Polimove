@@ -1,6 +1,7 @@
 package com.example.polimove.ui.profile
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,10 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
+import com.example.polimove.Login
 import com.example.polimove.databinding.FragmentProfileBinding
 import com.example.polimove.services.user.UserService
 
-private const val USER_CI_PARAM = "1722951165"
 
 class ProfileFragment : Fragment() {
 
@@ -55,12 +56,17 @@ class ProfileFragment : Fragment() {
 
         buttonCerrarSesion.setOnClickListener{
             UserService.signOff()
+            val intent = Intent(activity, Login::class.java)
+            startActivity(intent)
+
         }
 
         buttonEliminar.setOnClickListener{
             UserService.getUserId(cedula)
             val activity: Activity? = activity
             Toast.makeText(activity, "Datos eliminados exitosamente.", Toast.LENGTH_LONG)
+            val intent = Intent(activity, Login::class.java)
+            startActivity(intent)
         }
 
         return root
