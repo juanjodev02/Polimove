@@ -163,9 +163,8 @@ class LoginFragmentConductor : Fragment() {
                 }
             }
             .addOnFailureListener { exception ->
-                Log.w("TAG", "Hay un error con sus credenciales")
+                Log.d("TAG", "Ha sucedido algo con la colección")
             }
-
 
     }
 
