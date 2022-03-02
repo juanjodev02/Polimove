@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.polimove.MainActivity
 import com.example.polimove.databinding.FragmentSignInBinding
@@ -137,17 +138,22 @@ class SignInFragment : Fragment() {
                                     }
                                     else{
                                         Log.d(ContentValues.TAG, "No se pudo crear el usuario")
+                                        Toast.makeText(context,"Hubo un error, intentalo mas tarde", Toast.LENGTH_LONG).show()
                                     }
 
                                 }
                             }
                             .addOnFailureListener { e ->
-                                Log.w(ContentValues.TAG, "Error adding document", e)
+                                Log.w(ContentValues.TAG, "No se pudo agregar el usuario", e)
                             }
+                    }
+                    else
+                    {
+                        Toast.makeText(context,"Debes estar en los registros de la EPN", Toast.LENGTH_LONG).show()
                     }
                 }
             }.addOnFailureListener { exception ->
-                Log.w("TAG", "Hay un error con su registro", exception)
+                Log.w("TAG", "No existe la colección de usuarios", exception)
             }
 
 
