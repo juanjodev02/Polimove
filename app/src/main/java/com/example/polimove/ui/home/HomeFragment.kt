@@ -12,12 +12,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.services.user.UserService
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import androidx.navigation.fragment.findNavController
+import com.example.polimove.databinding.FragmentHomeBinding
 
 
 private const val USER_CI_PARAM = "1722951165"
@@ -45,7 +44,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        cedula = "1722951165"
+        cedula = "1721791661"
         val root: View = binding.root
 
         nameTextView = binding.textHome
@@ -61,14 +60,13 @@ class HomeFragment : Fragment() {
 
 
         UserService.getData(cedula as String) { nameUser ->
-            if (nameUser.routeId == null || nameUser.routeId.equals("")) {
-                this.layoutNoRoute.visibility = View.VISIBLE
-            } else {
+
+          if(nameUser.routeId != null){
                 this.hasRouteLayout.visibility = View.VISIBLE
                 nameTextView.text =
                     "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
 
-                UserService.getRouteName(nameUser.routeId) { routename ->
+                UserService.getRouteName(nameUser.routeId.toString()) { routename ->
                     textViewTitulo.text = "Tu ruta es: " + routename
                 }
 
@@ -79,12 +77,16 @@ class HomeFragment : Fragment() {
                 } catch (e: Exception) {
 
                 }
-
-                buttonReservarRuta.setOnClickListener(){
-                    findNavController().navigate(com.example.polimove.R.id.action_home_to_Routes)
-                }
-            }
+            }else{
+              this.layoutNoRoute.visibility = View.VISIBLE
+              buttonReservarRuta.setOnClickListener(){
+                  findNavController().navigate(com.example.polimove.R.id.action_home_to_Routes)
+              }
+          }
         }
+
+
+
 
         return root
 
