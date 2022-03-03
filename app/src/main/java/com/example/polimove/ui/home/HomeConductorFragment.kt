@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.polimove.R
-import com.example.polimove.databinding.FragmentHomeBinding
 import com.example.polimove.databinding.FragmentHomeConductorBinding
 import com.example.polimove.services.users.UserService
 import com.example.polimove.sharedPreferences.LOGIN_KEY
@@ -19,6 +22,7 @@ import com.example.polimove.sharedPreferences.SHAREDINFO_FILENAME
 
 private const val USER_CI_PARAM = "1751438498"
 class HomeConductorFragment : Fragment() {
+    private lateinit var buttonAgregarPasajaero: Button
 
     private var _binding: FragmentHomeConductorBinding? = null
     private val binding get() = _binding!!
@@ -63,6 +67,12 @@ class HomeConductorFragment : Fragment() {
 
 
         return root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        buttonAgregarPasajaero.setOnClickListener{
+            findNavController().navigate(R.id.action_home_conductor_to_home_driverqr)
+        }
     }
 
     fun ReadInformation():Pair<String,String>{

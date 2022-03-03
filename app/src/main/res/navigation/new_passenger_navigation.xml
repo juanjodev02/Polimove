@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_passenger_navigation"
+    app:startDestination="@id/home_driverqr">
+    <fragment
+        android:id="@+id/home_conductor"
+        android:name="com.example.polimove.ui.home.HomeConductorFragment"
+        android:label="fragment_home_conductor"
+        tools:layout="@layout/fragment_home_conductor" >
+        <action
+            android:id="@+id/action_home_conductor_to_home_driverqr"
+            app:destination="@id/home_driverqr" />
+    </fragment>
+    <fragment
+        android:id="@+id/home_driverqr"
+        android:name="com.example.polimove.ui.home.HomeDriverQRFragment"
+        android:label="fragment_home_driverqr"
+        tools:layout="@layout/fragment_home_driverqr" >
+        <action
+            android:id="@+id/action_home_driverqr_to_home_conductor"
+            app:destination="@id/home_conductor" />
+    </fragment>
+</navigation>
