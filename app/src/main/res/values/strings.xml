@@ -52,6 +52,21 @@
     <string name="reservar_ruta">Reservar ruta</string>
     <string name="agregar_pasajero">+</string>
     <string name="mensaje_nuevo_pasajero">Nuevo pasajero</string>
-    <string name="c_dula">Cédula</string>
-    <string name="_9_o_m_s_caracteres">9 o más caracteres</string>
+
+    <!--PERFIL CONDUCTOR-->
+    <string name="textViewStName"></string>
+    <string name="textViewStEmail"></string>
+    <string name="textViewStNumber"></string>
+    <string name="buttonCerrarSesion">Cerrar Sesión</string>
+    <string name="buttonEliminarDatos">Eliminar mis datos</string>
+
+    <!--CODIGO QR DEL CONDUCTOR-->
+    <string name="textViewTitle">Escanea un código QR</string>
+    <string name="textViewNameStd">LESLY TIPANLUIZA</string>
+    <string name="buttonContinuar">Continuar</string>
+    <string name="textViewQRCODE">QR CODE</string>
+    <string name="textViewNumberAsiento">12-B</string>
+    <string name="c_dula">1722987745</string>
+    <string name="_9_o_m_s_caracteres">secure_password</string>
+
 </resources>
