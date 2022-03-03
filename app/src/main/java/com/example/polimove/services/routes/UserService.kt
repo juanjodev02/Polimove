@@ -58,6 +58,23 @@ class UserService {
         fun signOff(){
             Firebase.auth.signOut()
         }
+        fun getData(cedula: String?, cb: (user: User) -> Unit): Unit {
+            val firestore = FirebaseFirestore.getInstance()
+            firestore
+                .collection("usuarios")
+                .whereEqualTo("cedula", cedula)
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        var nameUser = document.toObject(User::class.java)
+                        nameUser.name = document["name"].toString()
+                        nameUser.lastName = document["lastName"].toString()
+                        nameUser.routeId = document["routeId"].toString()
+                        nameUser.email = document["email"].toString()
+                        cb(nameUser)
+                    }
+                }
+        }
 
     }
 }

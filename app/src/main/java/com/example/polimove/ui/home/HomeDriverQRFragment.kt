@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
@@ -42,17 +43,18 @@ class HomeDriverQRFragment: Fragment() {
         textViewNameStd = binding.textViewNameStd
 
         integrador()
+
         parentFragmentManager.setFragmentResultListener("key",this, FragmentResultListener {
                 Key, result ->
             cedulaStudent = result.getString("cedula")
             Log.d("CI", "La cédula: $cedulaStudent")
-            UserService.getDriverData(cedulaStudent as String) {nameUser->
+            UserService.getData(cedulaStudent as String) {nameUser->
                 textViewNameStd.text= nameUser.name+" "+nameUser.lastName
             }
         })
         return root
     }
-
+/*
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
@@ -60,12 +62,31 @@ class HomeDriverQRFragment: Fragment() {
     ) {
         super.onActivityResult(requestCode, resultCode, data)
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        Log.d("VALOR DE LA CEDULA",result.contents.toString() )
         cedulaStudent = result.contents
         //textViewNameStd.setText(datos)
+    }*/
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(activity, "Lectura Cancelada", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(activity, result.contents, Toast.LENGTH_LONG).show()
+                textViewNameStd.setText(result.contents.toString())
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
+
+
+
+
     fun integrador(){
-        val integrador = IntentIntegrator(this.activity)
+        val integrador = IntentIntegrator.forSupportFragment(this)
         integrador.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
         integrador.setPrompt("Escaneando código QR")
         integrador.setCameraId(0)
