@@ -53,53 +53,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera_view" />
 
+
     <TextView
         android:id="@+id/textViewNameStd"
         android:layout_width="0dp"
         android:layout_height="31dp"
+        android:layout_marginVertical="30dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="25dp"
-        android:text="@string/textViewNameStd"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle2" />
 
-    <TextView
-        android:id="@+id/textViewAsiento"
-        android:layout_width="132dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="61dp"
-        android:text="Asiento asignado:"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toStartOf="@+id/textViewNumberAsiento"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNameStd" />
-
-    <TextView
-        android:id="@+id/textViewNumberAsiento"
-        android:layout_width="0dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="212dp"
-        android:text="@string/textViewNumberAsiento"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNameStd" />
-
-
-
     <Button
         android:id="@+id/buttonContinuar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="25dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/buttonContinuar"
@@ -108,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAsiento" />
+        app:layout_constraintTop_toTopOf="@+id/textViewNameStd" />
 
     <SurfaceView
         android:id="@+id/camera_view"
