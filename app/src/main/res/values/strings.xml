@@ -66,5 +66,7 @@
     <string name="buttonContinuar">Continuar</string>
     <string name="textViewQRCODE">QR CODE</string>
     <string name="textViewNumberAsiento">12-B</string>
+    <string name="c_dula">1722987745</string>
+    <string name="_9_o_m_s_caracteres">secure_password</string>
 
 </resources>
