@@ -100,6 +100,30 @@ class UserService {
             Firebase.auth.signOut()
         }
 
+        fun getDriverId(cedula: String?): Unit{
+            val firestore = FirebaseFirestore.getInstance()
+            firestore
+                .collection("conductores")
+                .whereEqualTo("cedula",cedula)
+                .get()
+                .addOnSuccessListener { result->
+                    for(document in result){
+                        var userid = document.id
+                        deleteDriver(userid)
+                    }
+                }
+        }
+
+        fun deleteDriver(idUser:String){
+            val db = Firebase.firestore
+            db.collection("conductores")
+                .document(idUser)
+                .delete()
+                .addOnSuccessListener { Log.d("TAG", "DocumentSnapshot successfully deleted!") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+
+        }
+
 
 
 
