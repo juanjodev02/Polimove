@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.polimove.Login
+import com.example.polimove.LoginConductor
 import com.example.polimove.databinding.FragmentProfileBinding
 import com.example.polimove.services.users.UserService
 import com.example.polimove.sharedPreferences.LOGIN_KEY
@@ -56,7 +56,7 @@ class ProfileFragment : Fragment() {
 
             buttonCerrarSesion.setOnClickListener {
                 UserService.signOff()
-                val intent = Intent(activity, Login::class.java)
+                val intent = Intent(activity, LoginConductor::class.java)
                 startActivity(intent)
 
             }
@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
                 UserService.getDriverId(this.cedula.toString())
                 val activity: Activity? = activity
                 Toast.makeText(activity, "Datos eliminados exitosamente.", Toast.LENGTH_LONG)
-                val intent = Intent(activity, Login::class.java)
+                val intent = Intent(activity, LoginConductor::class.java)
                 startActivity(intent)
             }
 
