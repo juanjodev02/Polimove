@@ -52,4 +52,6 @@
     <string name="reservar_ruta">Reservar ruta</string>
     <string name="agregar_pasajero">+</string>
     <string name="mensaje_nuevo_pasajero">Nuevo pasajero</string>
+    <string name="c_dula">Cédula</string>
+    <string name="_9_o_m_s_caracteres">9 o más caracteres</string>
 </resources>
