@@ -57,12 +57,10 @@ class HomeFragment : Fragment() {
         if(listadoLeido?.first != null) {
             this.cedula = listadoLeido.first
             UserService.getData(this.cedula) { nameUser ->
-
+                nameTextView.text =
+                    "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
                 if (nameUser.routeId != null) {
                     this.hasRouteLayout.visibility = View.VISIBLE
-                    nameTextView.text =
-                        "¡Hola! " + String(Character.toChars(0x1F44B)) + " " + nameUser.name + " " + nameUser.lastName
-
                     UserService.getRouteName(nameUser.routeId.toString()) { routename ->
                         textViewTitulo.text = "Tu ruta es: " + routename
                     }
