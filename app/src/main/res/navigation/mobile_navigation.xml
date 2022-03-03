@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.polimove.ui.home.HomeConductorFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home_conductor" />
+        tools:layout="@layout/fragment_home_conductor" >
+        <action
+            android:id="@+id/action_navigation_home_to_driverqr"
+            app:destination="@id/driverqr" />
+    </fragment>
 
     -->
     <fragment
@@ -40,4 +44,10 @@
         android:name="com.example.polimove.ui.routeDetails.RouteDetails"
         android:label="Detalle de ruta"
         tools:layout="@layout/fragment_route_details" />
+
+    <fragment
+        android:id="@+id/driverqr"
+        android:name="com.example.polimove.ui.home.HomeDriverQRFragment"
+        android:label="Detalle de ruta"
+        tools:layout="@layout/fragment_home_driverqr" />
 </navigation>

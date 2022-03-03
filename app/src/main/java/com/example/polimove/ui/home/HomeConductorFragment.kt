@@ -60,7 +60,7 @@ class HomeConductorFragment : Fragment() {
 
 
         buttonAgregarPasajero.setOnClickListener{
-            //ir a pantalla escanear QR
+            findNavController().navigate(R.id.action_navigation_home_to_driverqr)
         }
 
 
@@ -69,9 +69,10 @@ class HomeConductorFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        buttonAgregarPasajaero.setOnClickListener{
-            findNavController().navigate(R.id.action_home_conductor_to_home_driverqr)
-        }
+
+//        buttonAgregarPasajaero.setOnClickListener{
+//            findNavController().navigate(R.id.action_home_conductor_to_home_driverqr)
+//        }
     }
 
     fun ReadInformation():Pair<String,String>{
