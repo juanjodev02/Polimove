@@ -1,20 +1,21 @@
 package com.example.polimove.ui.register
 
 import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.polimove.MainActivity
+import com.example.polimove.R
 import com.example.polimove.databinding.FragmentSignInBinding
+import com.example.polimove.ui.login.LoginFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -48,6 +49,8 @@ class SignInFragment : Fragment() {
         val editTextTextCorreoInstitucional = binding.editTextTextCorreoInstitucional
         val buttonRegistrarse = binding.buttonRegistrarse
         val editTextTextRepetirContrasena = binding.editTextTextRepetirContrasena
+
+
 
         signInViewModel.signInViewModel.observe(viewLifecycleOwner,
             Observer { signInFormState ->
@@ -112,29 +115,29 @@ class SignInFragment : Fragment() {
     }
 
     fun registro(cedula:String,email:String,password: String){
-        val db = Firebase.firestore
+        val database = Firebase.firestore
+        var banderaEncontrado: Boolean = false
 
-
-        db.collection("estudiantes")
+        database.collection("estudiantes")
             .get()
             .addOnSuccessListener { result->
                 for(document in result){
                     if(document.data["cedula"]?.equals(cedula)==true){
+                        banderaEncontrado = true
                         val user = hashMapOf(
                             "cedula" to cedula,
-                            "contrasena" to password,
                             "email" to email,
                             "name" to document.data["name"].toString(),
                             "lastName" to document.data["lastName"].toString()
                         )
-                        db.collection("usuarios")
+                        database.collection("usuarios")
                             .add(user)
                             .addOnSuccessListener { documentReference ->
                                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener{
                                     if(it.isSuccessful){
-                                        Log.d(ContentValues.TAG, "Registro copletado exitosamente")
-                                        val intent = Intent(activity, MainActivity::class.java)
-                                        startActivity(intent)
+                                        Toast.makeText(context,"Registro exitoso, Bienvenido!", Toast.LENGTH_SHORT).show()
+                                        irALogin()
+
                                     }
                                     else{
                                         Log.d(ContentValues.TAG, "No se pudo crear el usuario")
@@ -147,11 +150,9 @@ class SignInFragment : Fragment() {
                                 Log.w(ContentValues.TAG, "No se pudo agregar el usuario", e)
                             }
                     }
-                    else
-                    {
-                        Toast.makeText(context,"Debes estar en los registros de la EPN", Toast.LENGTH_LONG).show()
-                    }
                 }
+                if(banderaEncontrado!=true)
+                    Toast.makeText(context,"Debes estar en los registros de la EPN", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener { exception ->
                 Log.w("TAG", "No existe la colección de usuarios", exception)
             }
@@ -161,5 +162,24 @@ class SignInFragment : Fragment() {
 
 
     }
+
+    fun irALogin(){
+        var loginView = true
+        val fragmentoActivo: Fragment
+        if (loginView){
+            fragmentoActivo = LoginFragment()
+        }
+        else
+            fragmentoActivo = SignInFragment()
+        loginView = !loginView
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.fragmentContainerView, fragmentoActivo)
+            ?.commit()
+    }
+
+
+
+
 
 }

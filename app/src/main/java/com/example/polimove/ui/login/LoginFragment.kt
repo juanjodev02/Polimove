@@ -169,7 +169,7 @@ class LoginFragment : Fragment() {
             }
             else{
                 Log.d("TAG","No se ha accedido")
-                Toast.makeText(context,"Tus credenciales son incorrectas",Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"Tus credenciales son incorrectas",Toast.LENGTH_SHORT).show()
             }
         }
     }
